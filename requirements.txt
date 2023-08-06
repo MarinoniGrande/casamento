@@ -6,6 +6,12 @@ wheel
 # Django
 django==4.1.6
 
+# Django user agents
+ua-parser==0.10.0
+user-agents==2.2.0
+django-user-agents==0.4.0
+
+
 gunicorn
 psycopg2-binary
 dj-database-url
