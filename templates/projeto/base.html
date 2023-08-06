@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+{% load static %}
+{% load user_agents %}
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block titulo %}Stephanie & Lucas{% endblock %}</title>
+    <link rel="icon" href="/static/img/favicon-16x16.png"/>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Css Font awes![](../../../../Downloads/lucas_e_pahnie.webp)ome -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font/Great_Vibes/webfontkit-20230725-134155/stylesheet.css' %}">
+    <!-- Css do componente Select2 -->
+    <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+
+    <!-- Ícones -->
+    <link rel="stylesheet" href="{% static 'css/fontface/icone_pin/icone_menu/icons_menu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontface/icone_pin/icons_pin.css' %}">
+
+    <!-- Css Booststrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap-4.4.1/dist/css/bootstrap.min.css' %}">
+    <!-- Cores utilizadas no projeto --><!-- Jquery v3.5.1 versao -->
+    <script type="text/javascript" src="{% static 'js/jquery/js/jquery_3.5.1v.min.js' %}"></script>
+
+    <!-- Máscaras do jquery com regexp -->
+    <script type="text/javascript" src="{% static 'js/utilitarios/mascara/mask.min.js' %}"></script>
+    <style>
+        @font-face {
+            font-family: 'theseasons_bd';
+            src: url('/static/font/seasons/Fontspring-DEMO-theseasons-bd.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+    </style>
+    <style>
+        .btn-success {
+            color: var(--no-white);
+            background-color: #9EA899;
+            border-color: #9EA899;
+        }
+
+        .btn-success:hover {
+            color: var(--no-white);
+            background-color: #546550;
+            border-color: #546550;
+        }
+
+        .btn-success-inv {
+            color: var(--no-white);
+
+            background-color: #546550;
+            border-color: #546550;
+        }
+
+        .btn-success-inv:hover {
+            color: var(--no-white);
+            background-color: #778872;
+            border-color: #778872;
+        }
+
+    </style>
+
+    <style>
+        /* Feel free to change duration */
+        /* .labl.labl-background>input:checked+label,
+            .labl.labl-background>input:hover+label {
+                background-color: var(--danger) !important;
+                color: white !important;
+            } */
+        .animated {
+            -webkit-animation-duration: 300ms;
+            animation-duration: 300ms;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        .owl-animated-out {
+            z-index: 0;
+        }
+
+        .fadeOut {
+            z-index: 0;
+        }
+
+        .owl-item.active {
+            z-index: 1 !important;
+        }
+
+        .owl-item.active {
+            -webkit-animation-name: slideron;
+            animation-name: slideron;
+        }
+
+        @-webkit-keyframes slideron {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideron {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        :root {
+
+            /* Cores padrões */
+
+            --white: #fff;
+            --no-white: #FFF;
+            --white-secondary: #f7f7f7;
+            --white-secondary-hover: #e4e7ea;
+            --global-bg-color: #FFF;
+            --texto: #444;
+            --ice-blue: #edeff0;
+            --windows-blue: #3d85c6;
+            --sunflower-yellow: #ffd200;
+            --blue-gray: #8a9297;
+            /* cores do padrão 1 */
+            --mundo-padrao1-1: #f6fffb;
+            --mundo-padrao1-2: #00af66;
+            /* cores padrao 2 */
+            --mundo-padrao2-1: #fffdfd;
+            --mundo-padrao2-2: #e682a9;
+            /* cores padrao 3 */
+            --mundo-padrao3-1: #ad7c59;
+            --mundo-padrao3-2: #fffdfc;
+            /* cores padrao 4 */
+            --mundo-padrao4-1: #8986ca;
+            --mundo-padrao4-2: #fbfaff;
+            /* cores padrao 5 segue as mesmas cores do padrao 1 cores padrao 6 segue mesmo padrão do navy-blue *//* cores padrao 7 */
+            --mundo-padrao7-1: #fe0b00;
+            --mundo-padrao7-2: #fffbfa;
+            /* cores padrao marcas */
+            --mundo-marcas-1: var(--light-navy-blue);
+            --mundo-marcas-2: #f6fbff;
+
+
+            --pale-sky-blue: #d7e1e7;
+
+            /* cool blue */
+            --primary: #3d85c6;
+            --primary-hover: #397dba;
+
+            /* light-navy */
+            --light-navy: #18537d;
+            --light-navy-hover: #144466;
+
+            /* light-navy-blue */
+            --light-navy-blue: #315c8e;
+            --light-navy-blue-hover: #2b527e;
+
+            --marine: #083050;
+
+            --outline-primary: #FFF;
+            --outline-primary-hover: #E8F8FF;
+
+            --secondary: #d7e1e7;
+            --secondary-hover: #bdc6cb;
+
+            --success: #9FC44E;
+            --success-hover: #3ea662;
+
+            --info: #294d80;
+            --info-hover: #22406a;
+
+            --warning: #f7bf20;
+            --warning-hover: #e3a312;
+
+            --danger: #911436;
+            --danger-hover: #d7343b;
+
+            --light: #f0f3f5;
+            --light-hover: #d9e1e6;
+            --muted: #8a9297;
+
+            --dark-80: rgba(0, 0, 0, 0.8);
+            --dark-50: rgba(0, 0, 0, 0.5);
+            --dark-35: rgba(0, 0, 0, 0.35);
+            --dark-20: rgba(0, 0, 0, 0.2);
+            --dark-10: rgba(0, 0, 0, 0.1);
+            --dark-5: rgba(0, 0, 0, 0.05);
+
+            --tabela: #EFF3F5;
+            --tabela-hover: #dce0e2;
+            /* Fim Cores Padrões *//* Tamanhos de telas utilizados para @media responsive */
+            --breakpoint-xs: 0;
+            --breakpoint-sm: 576px;
+            --breakpoint-md: 768px;
+            --breakpoint-lg: 992px;
+            --breakpoint-xl: 1200px;
+            /* Fim *//* Cores personalizadas e icones do cliente */
+
+            --amarelo-cliente: #ffd200;
+
+            /* N Amarelo */
+            --cliente-icone-warning-btn: url("{% static 'img/logos_e_banners/n-amarelo.png' %}");
+
+            /* Azul */
+            --cliente-color-primary: #18537d;
+            --cliente-color-primary-hover: #144467;
+            --cliente-icone-primary-btn: url("{% static 'img/logos_e_banners/n-azul.png' %}");
+
+            --loader-path: url("{% static 'loader/img/loader.gif' %}");
+        }
+
+        .mega-ofertas {
+            background: url('{% static "img/logos_e_banners/bg_oferta_tv.png" %}') no-repeat center !important;
+        }
+
+        .d-none-valor-banco {
+            display: none
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/cores.css' %}">
+
+    <!-- Css OWL Carousel -->
+    <link rel="stylesheet" href="{% static 'OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css' %}">
+
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Toastr, Alerta de sucesso ou error css -->
+    <link rel="stylesheet" href="{% static 'toastr/css/toastr.min.css' %}">
+
+    <!-- datepicker -->
+    <link rel="stylesheet" href="{% static 'datepicker/css/datepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce_menu/css/style.css' %}">
+
+    <!-- Jquery UI -->
+    <script type="text/javascript" src="{% static 'js/jquery/js/jquery-ui.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+    <script src="{% static 'leaflet/leaflet.js' %}"></script>
+
+
+    <script>
+        Number.prototype.toLocaleFixed = function (o) {
+            return "number" == typeof parseFloat(this) ? parseFloat(this).toLocaleString("pt-BR", {
+                minimumFractionDigits: o,
+                maximumFractionDigits: o
+            }) : this
+        }
+
+        function blackPanel(_this) {
+            if ($(_this).hasClass('asidebar-desfoco-confirmacao')) {
+                onToggleCarrinhoPopUp(null, $(_this).attr('data-seletor').toString());
+            } else if ($(_this).hasClass('asidebar-desfoco')) {
+                onToggleCarrinho();
+            }
+        }
+
+        function blackPanelMobile(_this) {
+            if ($(_this).hasClass('asidebar-desfoco-confirmacao')) {
+                abrirModalQuantidade(__esse, null, $(_this).attr('data-seletor').toString());
+            } else if ($(_this).hasClass('asidebar-desfoco')) {
+
+            }
+        }
+
+    </script>
+    <style>
+        * {
+            scroll-behavior: smooth; /* <----- THE SECRET ---- */
+        }
+
+    </style>
+    {% block css %}
+    {% endblock %}
+</head><!-- head -->
+
+
+<body class="app header-fixed sidebar-minimized aside-menu-minimized sidebar-lg-show" style="background: #ffffff">
+
+<div class="body-disabled"></div>
+
+{% block app_header %}
+    {% if request|is_mobile %}
+        <header>
+            <nav style="transition: none 0s ease 0s; position: fixed; z-index: 1041; top: 0; width: 100%;background:#9EA899;">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-12 d-flex justify-content-start mt-1 mb-1">
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center">
+                                <button onclick="toggleSidebar()" type="button" class="ml-2"
+                                        style="border-style:none;background:transparent;">
+                                    <img data-src="/static/images/hamburger.svg" loading="lazy" width="25"
+                                         height="25"
+                                         class=" lazyloaded" alt="hamburguer" src="/static/images/hamburger.svg">
+                                </button>
+                            </div>
+                            <div class="col">
+                                <div class="bloco_meio-header w-100">
+                                    <div id="content" class="text-center mt-2" style="">
+                                        <p id="together" class="font-weight-bold font-2xl">Faltam:</p>
+                                        <div id="timer" class="mt-2">
+                                            <b id="d"></b> Dias
+                                            <b id="h"></b> Horas
+                                            <b id="m"></b> Minutos
+                                            <b id="s"></b> Segundos
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn col-2 d-flex align-items-center text-white"><a href="#rsvp"
+                                                                                           class="text-white font-weight-bold">RSVP</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </nav>
+        </header>
+        <div class="sidebar-mobile" style="left: -100%; padding: 0px; z-index: 1041;">
+            <div class="body-sidebar">
+                <div class="d-flex justify-content-start px-3 align-items-center py-2"
+                     style="border-bottom: 2px solid #9EA899">
+                    <p class="font-3xl icon_arrow-back02 text font-weight-bold"
+                       onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" style="color: #9EA899"></p>
+
+                    <div class="col">
+                                <div class="bloco_meio-header w-100">
+                                    <div id="content" class="text-center mt-2" style="">
+                                        <p id="together" class="font-weight-bold font-2xl">Faltam:</p>
+                                        <div id="timer1" class="mt-2">
+                                            <b id="d1"></b> Dias
+                                            <b id="h1"></b> Horas
+                                            <b id="m1"></b> Minutos
+                                            <b id="s1"></b> Segundos
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+                <div class="col-12 font-weight-semibold"
+                     style="max-height:calc(100vh - 75px); overflow:auto; padding-bottom:120px;">
+                    <ul class="categorias-sidebar" style="padding-left:0;"><!-- HTML ITEM -->
+                        <li class="has-children padrao-2036">
+                            <div class="item_categoria text-center mt-4">
+                                <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#inicio">Início</a>
+                            </div>
+                            </a>
+                        </li><!-- HTML ITEM -->
+                        <li class="has-children padrao-2036">
+                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#nossa-historia">
+                                <div class="item_categoria text-center">
+                                    Nossa história
+                                </div>
+                            </a>
+                        </li><!-- HTML ITEM -->
+                        <li class="has-children padrao-2036">
+                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#galeria">
+                                <div class="item_categoria text-center">
+                                    Galeria
+                                </div>
+                            </a>
+                        </li><!-- HTML ITEM -->
+                        <li class="has-children padrao-2036">
+                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#casamento">
+                                <div class="item_categoria text-center">
+                                    Casamento
+                                </div>
+                            </a>
+                        </li><!-- HTML ITEM -->
+                        <li class="has-children padrao-2036">
+                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#localizacao">
+                                <div class="item_categoria text-center">
+                                    Localização
+                                </div>
+                            </a>
+                        </li><!-- HTML ITEM -->
+                        <li class="has-children padrao-2036">
+                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="/presentes">
+                                <div class="item_categoria text-center">
+                                    Lista Presentes
+                                </div>
+                            </a>
+                        </li><!-- HTML ITEM -->
+                        <li class="has-children padrao-2036">
+                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#rsvp">
+                                <div class="item_categoria text-center">
+                                    RSVP
+                                </div>
+                            </a>
+                        </li><!-- HTML ITEM -->
+
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+        <script>
+
+            function toggleSidebar() {
+                $("body").css({overflow: "auto"}), $(".body-disabled").css({visibility: "hidden"});
+                var t = document.getElementsByClassName("sidebar-mobile")[0];
+                "0px" === t.style.left ? (t.style.left = "-100%") : ($("body").css({overflow: "hidden"}), $(".body-disabled").css({visibility: "visible"}), (t.style.left = "0"));
+            }
+        </script>
+    {% else %}
+        <header>
+            <nav style="transition: none 0s ease 0s; position: fixed;height:40px; z-index: 1041; top: 0; width: 100%;background:#ffffff;">
+                <!--
+                <div class="row banner-topo">
+                    <div class="col-12">
+                           <img loading="lazy" src="/media/banner/banner_desc_desktop.jpg" class="w-100" height="auto">
+                    </div>
+                </div>
+                -->
+                <!--<div class="col-12 px-3 d-flex py-1" style="background: #ffffff;">
+                    <div class="bloco_meio-header w-100 ml-3">
+                        <div id="content" class="text-center mt-2" style="">
+                            <p id="together" class="font-weight-bold font-2xl">Estamos juntos há:</p>
+                            <div id="timer" class="mt-2">
+                                <b id="d"></b> Dias
+                                <b id="h"></b> Horas
+                                <b id="m"></b> Minutos
+                                <b id="s"></b> Segundos
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <!-- HTML BASE -->
+                <div class="submenu" style="background: #9EA899">
+                    <div class="container">
+                        <style>
+                            .link-submenu a {
+                                color: #fff;
+                                font-family: theseasons_bd, serif;
+                            }
+
+                            .link-submenu:hover > a {
+                                color: #546550 !important;
+                                transition: 0.3s !important;
+                            }
+
+                            .item_link > a {
+                                font-size: 16px;
+                                cursor: pointer !important;
+                            }
+
+                            ul {
+                                list-style-type: none;
+                            }
+                        </style>
+                        <ul class="lista-submenu w-100 d-flex align-items-center" style="background-color: #9EA899">
+                            <li class="link-submenu None text-white pl-2">
+                                <a href="#inicio"
+                                   class="d-flex align-items-center font-xl">
+                                    Início
+                                </a>
+                            </li><!-- HTML ITEM UNICO -->
+                            <li class="link-submenu None text-white pl-2">
+                                <a href="#nossa-historia"
+                                   class="d-flex align-items-center font-xl">
+                                    Nossa história
+                                </a>
+                            </li><!-- HTML ITEM UNICO -->
+                            <li class="link-submenu None text-white pl-2">
+                                <a href="#galeria"
+                                   class="d-flex align-items-center font-xl">
+                                    Galeria
+                                </a>
+                            </li><!-- HTML ITEM UNICO -->
+                            <li class="link-submenu None text-white pl-2">
+                                <a href="#casamento"
+                                   class="d-flex align-items-center font-xl">
+                                    Casamento
+                                </a>
+                            </li><!-- HTML ITEM UNICO -->
+                            <li class="link-submenu None text-white pl-2">
+                                <a href="#localizacao"
+                                   class="d-flex align-items-center font-xl">
+                                    Localização
+                                </a>
+                            </li><!-- HTML ITEM UNICO -->
+                            <li class="link-submenu None text-white pl-2">
+                                <a href="/presentes"
+                                   class="d-flex align-items-center font-xl">
+                                    Lista Presentes
+                                </a>
+                            </li><!-- HTML ITEM UNICO -->
+                            <li class="link-submenu None text-white pl-2">
+                                <a href="#rsvp"
+                                   class="d-flex align-items-center font-xl">
+                                    RSVP
+                                </a>
+                            </li><!-- HTML ITEM UNICO -->
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    {% endif %}
+{% endblock %}
+
+
+{% block app_alertas %}
+
+{% endblock %}
+
+{% block app_body %}
+    <div class="app-body" style="padding-top: 130px;">
+
+        {% block breadcrumb %}
+        {% endblock %}
+
+        {% block bannerloja %}
+        {% endblock %}
+
+        <main class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        {% block main %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block importacoes_js %}
+
+    <script type="text/javascript" src="{% static 'OwlCarousel2-2.3.4/dist/owl.carousel.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/contador.js' %}"></script>
+
+    <!-- Toastr, alertas de sucesso e erros JS -->
+    <script defer type="text/javascript" src="{% static 'toastr/js/toastr.min.js' %}"></script>
+
+    <!-- Popper js -->
+    <script defer type="text/javascript" src="{% static 'js/popper/js/popper.min.js' %}"></script>
+
+    <!-- Bootstrap js -->
+    <script type="text/javascript" src="{% static 'bootstrap-4.4.1/dist/js/bootstrap.min.js' %}"></script>
+
+    <!-- Imprimir js -->
+    <script defer type="text/javascript"
+            src="{% static 'js/utilitarios/exportar_imprimir/printThis.min.js' %}"></script>
+
+    <!-- Popover js -->
+    <script defer type="text/javascript" src="{% static 'js/popover/popovers.min.js' %}"></script>
+
+    <!-- Select2 -->
+    <script type="text/javascript" src="{% static 'select2/js/select2.min.js' %}"></script>
+
+    <!-- Title -->
+    <script defer type="text/javascript" src="{% static 'js/utilitarios/formatar/title.min.js' %}"></script>
+
+    <script>
+        function carregar_carrossel() {
+            {% if request|is_mobile %}
+                $('.item>a>[width="1280"]').parent().parent().remove();
+                $('.desktop-banner').parent().remove();
+            {% else %}
+                $('.item>a>[width="360"]').parent().parent().remove();
+                $('.mobile-banner').parent().remove();
+            {% endif %}
+
+            let slider_id = '.carousel-topo';
+            let slider_config = {
+                "title": "Banner Home",
+                "show_title": "0",
+                "status": "1",
+                "scheduled_ajax": null,
+                "nav": "0",
+                "dots": "1",
+                "center": "0",
+                "items": "1",
+                "loop": "1",
+                "margin": "0",
+                "merge": null,
+                "URLhashListener": null,
+                "stagePadding": "0",
+                "lazyLoad": "0",
+                "transition": "fadeOut",
+                "autoplay": "1",
+                "autoplayTimeout": "6000",
+                "autoplayHoverPause": "1",
+                "autoHeight": "0",
+                "nav_brk1": "0",
+                "items_brk1": "1",
+                "nav_brk2": "0",
+                "items_brk2": "1",
+                "nav_brk3": "0",
+                "items_brk3": "1",
+                "nav_brk4": "0",
+                "items_brk4": "1"
+            };
+
+            let items = ((slider_config.items >= 0 && slider_config.items != null) ? slider_config.items : 1);
+            if (slider_config.transition !== 'slide') {
+                items = 1;
+            }
+
+            let stagePadding = slider_config.stagePadding !== '' ? parseInt(slider_config.stagePadding) : 0;
+            let animate_Out = slider_config.transition !== 'fadeOut';
+
+
+            /** Lazyload bug when fewer items exist in the carousel then the ones displayed */
+            $(slider_id).on('initialized.owl.carousel', function (event) {
+                let scopeSize = event.page.size;
+                for (let i = 0; i < scopeSize; i++) {
+                    let imgsrc = $(event.target).find('.owl-item').eq(i).find('img').attr('data-src');
+                    $(event.target).find('.owl-item').eq(i).find('img').attr('src', imgsrc);
+                    $(event.target).find('.owl-item').eq(i).find('img').attr('style', 'opacity: 1;');
+                }
+            });
+
+            $(slider_id).owlCarousel({
+                dots: false,
+                center: (slider_config.center === 1 && animate_Out),
+                items: 1,
+                loop: parseInt(slider_config.loop) === 1,
+                margin: 20,
+                stagePadding: parseInt(slider_config.center) === 1 ? 0 : stagePadding,
+                lazyLoad: false,
+                autoplay: parseInt(slider_config.autoplay) === 1,
+                autoplayTimeout: 6000,
+                autoplayHoverPause: parseInt(slider_config.autoplayHoverPause) === 1,
+                autoHeight: parseInt(slider_config.autoHeight) === 1,
+                animateOut: "fadeOut",
+                animateIn: "slideron",
+                nav: false,
+                navClass: ["prev btn", "next btn"],
+                navText: ["", ""],
+
+            });
+
+
+        }
+
+        carregar_carrossel();
+
+    </script>
+
+    <script>
+        (function (document, history, location) {
+            var HISTORY_SUPPORT = !!(history && history.pushState);
+
+            var anchorScrolls = {
+                ANCHOR_REGEX: /^#[^ ]+$/,
+                OFFSET_HEIGHT_PX: {% if request|is_mobile %}70{% else %}40{% endif %},
+
+                /**
+                 * Establish events, and fix initial scroll position if a hash is provided.
+                 */
+                init: function () {
+                    this.scrollToCurrent();
+                    window.addEventListener('hashchange', this.scrollToCurrent.bind(this));
+                    document.body.addEventListener('click', this.delegateAnchors.bind(this));
+                },
+
+                /**
+                 * Return the offset amount to deduct from the normal scroll position.
+                 * Modify as appropriate to allow for dynamic calculations
+                 */
+                getFixedOffset: function () {
+                    return this.OFFSET_HEIGHT_PX;
+                },
+
+                /**
+                 * If the provided href is an anchor which resolves to an element on the
+                 * page, scroll to it.
+                 * @param  {String} href
+                 * @return {Boolean} - Was the href an anchor.
+                 */
+                scrollIfAnchor: function (href, pushToHistory) {
+                    var match, rect, anchorOffset;
+
+                    if (!this.ANCHOR_REGEX.test(href)) {
+                        return false;
+                    }
+
+                    match = document.getElementById(href.slice(1));
+
+                    if (match) {
+                        rect = match.getBoundingClientRect();
+                        anchorOffset = window.pageYOffset + rect.top - this.getFixedOffset();
+                        window.scrollTo(window.pageXOffset, anchorOffset);
+
+                        // Add the state to history as-per normal anchor links
+                        if (HISTORY_SUPPORT && pushToHistory) {
+                            history.pushState({}, document.title, location.pathname + href);
+                        }
+                    }
+
+                    return !!match;
+                },
+
+                /**
+                 * Attempt to scroll to the current location's hash.
+                 */
+                scrollToCurrent: function () {
+                    this.scrollIfAnchor(window.location.hash);
+                },
+
+                /**
+                 * If the click event's target was an anchor, fix the scroll position.
+                 */
+                delegateAnchors: function (e) {
+                    var elem = e.target;
+
+                    if (
+                        elem.nodeName === 'A' &&
+                        this.scrollIfAnchor(elem.getAttribute('href'), true)
+                    ) {
+                        e.preventDefault();
+                    }
+                }
+            };
+
+            window.addEventListener(
+                'DOMContentLoaded', anchorScrolls.init.bind(anchorScrolls)
+            );
+        })(window.document, window.history, window.location);
+    </script>
+{% endblock %}
+
+
+</body>
+
+</html>

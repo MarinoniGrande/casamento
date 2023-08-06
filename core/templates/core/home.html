@@ -1,0 +1,517 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load user_agents %}
+
+{% block app_body %}
+    <style>
+        .btn-success {
+            color: var(--no-white);
+            background-color: #9EA899;
+            border-color: #9EA899;
+        }
+
+        .btn-success:hover {
+            color: var(--no-white);
+            background-color: #546550;
+            border-color: #546550;
+        }
+
+        .btn-success-inv {
+            color: var(--no-white);
+
+            background-color: #546550;
+            border-color: #546550;
+        }
+
+        .btn-success-inv:hover {
+            color: var(--no-white);
+            background-color: #778872;
+            border-color: #778872;
+        }
+
+    </style>
+    <style>
+
+        #inicio {
+            padding-top: 0px;
+            position: relative;
+        }
+
+        /* line 5, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio .cover-filter {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 100vh;
+        }
+
+        /* line 11, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio #couple-img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        /* line 19, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio #couple-data {
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* line 22, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio #couple-data #name {
+            position: absolute;
+            top: 130px;
+            left: 0px;
+            right: 0px;
+        }
+
+        /* line 27, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio #couple-data #name .escutcheon-container {
+            width: 250px;
+            position: relative;
+            display: block;
+            margin: 0px auto;
+        }
+
+        /* line 32, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio #couple-data #name .escutcheon-container .escutcheon-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        /* line 37, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio #couple-data #name .escutcheon-container .escutcheon-text .first-letter {
+            font-size: 60px;
+            position: absolute;
+            top: 50px;
+            left: 70px;
+        }
+
+        /* line 42, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio #couple-data #name .escutcheon-container .escutcheon-text .seccond-letter {
+            font-size: 60px;
+            position: absolute;
+            top: 90px;
+            right: 80px;
+        }
+
+        /* line 48, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio #couple-data #name h2 .content {
+            font-size: 80px;
+        }
+
+        /* line 51, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
+        #inicio #couple-data #name h4 .content {
+            font-size: 35px;
+        }
+
+    </style>
+
+    <section id="inicio">
+        <div data-interval="5" data-pagination="false" data-slide="options" data-slideshow="false" data-smooth="false"
+             style="display: none;">
+            <div class="cover-slider">
+                <div class="image-placeholder" data-behavior="image-placeholder"
+                     data-image="https://files.casare.me/gijeTo.jpg"><img alt="Gijeto"
+                                                                          src="https://files.casare.me/gijeTo.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" data-behavior="slideshow-target" data-factor="1.4" data-parallax="parallax-display"
+             id="couple-img"
+             style="background-image: {% if request|is_mobile %}url('/static/imagens/inicio_mobile.webp');{% else %}url('/static/imagens/lucas_e_phanie.webp');{% endif %}"></div>
+        <div id="couple-data">
+            <div class="text-center" id="name">
+                <div style="font-size: 90px; color: #5E5A56;">
+                    <h2 style=" font-family: great_vibesregular,serif; color: #5E5A56;">
+                        <span class="content">Stephanie & Lucas</span>
+                    </h2>
+                    <h4 class="pathway uppercase">
+                        <span class="content" style="font-family: theseasons_bd,serif; color: #5E5A56;">Novembro 05, 2023 . Haras Fortaleza . Curitiba PR</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="nossa-historia">
+        <div id="intro">
+            <div class="container" data-behavior="fade-on-scroll" data-speed="10">
+                <div class="row mt-3 ">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 col-sm-12">
+                        <div style="text-align: center;font-family:serif; color: #9EA899;">
+                            <p class="font-3xl ont-weight-bold mt-2" style=" color: #5E5A56;">NOSSA HISTÓRIA</p>
+                            <p class="font-2xl mt-3" style=" color: #9EA899;">ESTAMOS NOS CASANDO!</p>
+                            <p class=" font-xl mt-4" style=" color: #5E5A56;">
+                                Conheça os detalhes da nossa caminhada até esse grande sonho do nosso casamento. Quando
+                                nos conhecemos, nem imaginávamos que um dia viveríamos o nosso grande sonho: o
+                                casamento! O dia está chegando, o coração aperta e começa a passar um filme de tudo o
+                                que já vivemos e construímos. E como é bom relembrar cada pedacinho da nossa história de
+                                amor!
+                            </p>
+                            <p class="font-xl mt-4" style=" color: #5E5A56;">
+                                Bom, senta que lá vem história
+                                “A long time ago in a galaxy far far away….”
+                                Uma pandemia atingiu o mundo inteiro, em meio ao caos um Jedi lindo e inteligente salvou
+                                o gatinho de uma princesa.
+                                Em uma noite fria, dentro de um carro deram seu primeiro beijo. Desse dia em diante eles
+                                se tornaram inseparáveis. Eles descobriram que incrivelmente faziam aniversário na mesma
+                                semana, mesmo signo, haviam frequentado a mesma igreja, a mesma faculdade e tinham os
+                                gostos artísticos(filmes,séries e músicas) muito parecidos.
+                                Eles viajaram para lugares mágicos, mas sempre de máscara, já foram a casamentos lindos,
+                                já voaram sobre a as nuvens, conheceram lugares lindos e quentes, lindos e frios…
+                            </p>
+                            <p class="font-xl mt-4" style=" color: #5E5A56;">
+
+                                No dia 08/06/2021 comemoraram seus primeiros 365 dias. A pandemia foi se acalmando e no
+                                dia 27/11/2021 rolou o pedido de casamento em uma festa linda, agora no dia 02/11/2023
+                                está marcada a data mais esperada por eles!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria">
+        <div id="intro">
+            <div class="container" data-behavior="fade-on-scroll" data-speed="10">
+                <div class="row mt-3 ">
+                    <div class="col-12">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-no-container carousel-topo owl-theme mt-2 owl-carousel w-100">
+                <div class="item cursor-pointer">
+                    <a href="/" class="carrossel-imagem-desktop">
+                        <img class="d-block w-100 height-carousel"
+                             src="https://farmaciapermanente.com.br/media/banners/banner%20desktop%20(11).png"
+                             alt="Imagem Carousel">
+                    </a>
+                </div>
+                <div class="item cursor-pointer">
+                    <a href="/" class="carrossel-imagem-desktop">
+                        <img class="d-block w-100 height-carousel"
+                             src="https://farmaciapermanente.com.br/media/banners/banner%20desktop%20(8).png"
+                             alt="Imagem Carousel">
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="casamento" style="background-color: #9EA899 ">
+        <div class="row">
+            <div class="col-12 text-center" style="margin-top: 40px">
+                <span class="font-4xl font-weight-bold text-white">NOSSO CASAMENTO</span>
+            </div>
+        </div>
+        <style>
+            div.vertical-line {
+                width: 1px;
+                height: 100%;
+                float: left;
+                border-right: 2px ridge #5E5A56;
+                border-radius: 2px;
+            }
+        </style>
+        <div class="row mt-4 mb-5">
+            <div class="col-6 text-right vertical-line" style="height: 100%;">
+                <p class="font-3xl" style="color: #5E5A56;margin-right: 30px">Quando</p>
+                <p class="font-xl mt-2" style="margin-right: 30px">Quinta Feira, 05 de Novembro, 2023</p>
+                <p class="font-xl mt-1" style="margin-right: 30px">Cerimônia de casamento: 16:00</p>
+                <p class="font-xl mt-1" style="margin-right: 30px">Recepção: 19:00</p>
+            </div>
+            <div class="col-6 text-left vertical-line">
+                <p class="font-3xl" style="color: #5E5A56;margin-left: 30px">Onde</p>
+                <p class="font-xl mt-2" style="margin-left: 30px">Haras Fortaleza</p>
+                <p class="font-xl mt-1" style="margin-left: 30px">R. Antonio Singer, 7683 - Campo Largo da</p>
+                <p class="font-xl mt-1" style="margin-left: 30px">Roseira, São José dos Pinhais - PR</p>
+            </div>
+        </div>
+        <div class="row mt-4 m">
+            <div class="col-md-3 text-center"></div>
+            <div class="col-md-6 col-sm-12 text-center">
+                <div id="mapa_locais_2" class="w-100" style="height: 400px;"></div>
+                <script>
+
+                    $(document).ready(function () {
+                        initmaplocais();
+                        initmaplocal();
+                    });
+
+                    var locations = [];
+
+                    var map_locations_1 = [
+                        ['-25.676545879440635', '-49.177130799418464', '<div>Haras fortaleza</div><div><a href="https://goo.gl/maps/sfhudm7RjMzrLZWZ6">Link</div><div><a href="https://goo.gl/maps/sfhudm7RjMzrLZWZ6" target="_blank">Direções</div>', 1, null, true],
+
+                    ];
+
+                    locations_1 = map_locations_1
+
+                    var mapa_local
+                    var markers = []
+
+                    const initmaplocal = () => {
+                        try {
+                            mapa_local.remove()
+                        } catch (error) {
+                        }
+                        mapa_local = L.map('mapa_locais_2')
+
+                        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 19,
+                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                        }).addTo(mapa_local);
+
+                        locations_1.forEach((location) => {
+                            if (location[0] && location[1]) {
+                                const marker = L.marker([location[0], location[1]], {alt: location[0]}).addTo(mapa_local).bindPopup(`${location[2]}`
+                                )
+                                markers.push(marker)
+                            }
+                        });
+
+
+                        var markerLocations = markers.map(function (marker) {
+                            return marker.getLatLng();
+                        });
+                        // Centralize o mapa no local dos marcadores
+                        mapa_local.fitBounds(markerLocations, {maxZoom: 10});
+                    }
+
+                </script>
+            </div>
+            <div class="col-md-3 text-center">
+            </div>
+        </div>
+    </section>
+    <section id="localizacao" style="background:  url('/staticfiles/imagens/fundo.webp') no-repeat center fixed;    background-size: cover;">
+        <div class="row">
+            <div class="col-12 text-center" style="margin-top: 40px">
+                <span class="font-4xl font-weight-bold text-muted">COMO CHEGAR</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-2">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 col-sm-12">
+                        <p class="font-3xl" style="color: #5E5A56;">Transporte</p>
+                        <p class="font-xl mt-2">Trajeto bem asfaltado, com boa iluminação e estacionamento! Uber chega
+                            com facilidade, tomar cuidado para selecionar o "Haras Fortaleza" no maps ou Uber para ter
+                            certeza do destino!</p>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-3">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 col-sm-12">
+                        <p class="font-3xl" style="color: #5E5A56;">Acomodação</p>
+                        <p class="font-xl mt-2">Um pouco longe de Curitiba, então aconselhamos alguns hotéis mais perto
+                            como:
+                            Hotel La Dolce Vita Park e Eco Hotel Bouganville</p>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 col-sm-12 text-center">
+                <div id="mapa_locais" class="w-100" style="height: 400px;"></div>
+
+                <script>
+
+                    $(document).ready(function () {
+                        initmaplocais();
+                    });
+
+                    var locations = [];
+
+                    var map_locations = [
+                        ['-25.676545879440635', '-49.177130799418464', '<div>Haras fortaleza</div><div><a href="https://goo.gl/maps/sfhudm7RjMzrLZWZ6">Link</div><div><a href="https://goo.gl/maps/sfhudm7RjMzrLZWZ6" target="_blank">Direções</div>', 1, null, true],
+                        ['-25.60222878083247', '-49.17328653970712', '<div>Hotel La Dolce Vita Park</div><div><a href="http://www.hoteisladolcevita.com.br/">Link</div><div><a href="https://www.google.com/maps/dir/?api=1&destination=BR-376,%20623%20-%20Miringuava,%20S%C3%A3o%20Jos%C3%A9%20dos%20Pinhais%20-%20PR,%2083010-500,%20Brasil" target="_blank">Direções</div>', 1, null, true],
+                        ['-25.680614011186886', '-49.141150079926454', '<div>Eco Hotel Bouganville</div><div><a href="https://www.ecohotelbouganville.com.br/">Link</div><div><a href="https://www.google.com/maps/dir/?api=1&destination=Rua%20Domingos%20Burakowski%20-%20Contenda,%20S%C3%A3o%20Jos%C3%A9%20dos%20Pinhais%20-%20PR,%20Brasil" target="_blank">Direções</div>', 1, null, true],
+                    ];
+
+                    locations = map_locations
+
+                    var mapa_locais
+                    var markers = []
+
+                    const initmaplocais = () => {
+                        try {
+                            mapa_locais.remove()
+                        } catch (error) {
+                        }
+                        mapa_locais = L.map('mapa_locais')
+
+                        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 19,
+                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                        }).addTo(mapa_locais);
+
+                        locations.forEach((location) => {
+                            if (location[0] && location[1]) {
+                                const marker = L.marker([location[0], location[1]], {alt: location[0]}).addTo(mapa_locais).bindPopup(`${location[2]}`
+                                )
+                                markers.push(marker)
+                            }
+                        });
+
+
+                        var markerLocations = markers.map(function (marker) {
+                            return marker.getLatLng();
+                        });
+                        // Centralize o mapa no local dos marcadores
+                        mapa_locais.fitBounds(markerLocations, {maxZoom: 10});
+                    }
+
+                </script>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </section>
+    <section id="lista-presentes">
+        <div id="intro">
+            <div class="container" data-behavior="fade-on-scroll" data-speed="10">
+                <div class="row mt-3 ">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 col-sm-12">
+                        <div style="text-align: center;font-family:serif; color: #9EA899;">
+                            <p class="font-3xl ont-weight-bold mt-2 mb-3" style=" color: #5E5A56;">LISTA DE
+                                PRESENTES</p>
+                            <p class=" font-2xl mt-4" style=" color: #5E5A56;">
+                                Queridos familiares e amigos, para nós, a presença de vocês neste dia tão especial é o
+                                maior presente que poderíamos receber. Mas, se vocês também quiserem nos presentear,
+                                ficaremos muito agradecidos.
+                            </p>
+                            <p class="font-2xl" style=" color: #5E5A56;">
+                                Com amor, Phanie e Lucas.
+                            </p>
+                            <a href="/presentes"><div class="btn btn-success mt-5 btn-lg font-2xl mb-5">Ver lista</div></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="rsvp" style="background: url('/staticfiles/imagens/rvsp.jpg') no-repeat center fixed;    background-size: cover;">
+        <div id="">
+            <div class="container" data-behavior="fade-on-scroll" data-speed="10">
+                <div class="row mt-3 ">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 col-sm-12">
+                        <div style="font-family:serif; color: #9EA899;">
+                            <p class="font-5xl ont-weight-bold mt-4 mb-3" style="text-align: center; color: #5E5A56;">
+                                RSVP</p>
+                            <p class="font-3xl ont-weight-bold mt-2 mb-3" style="text-align: center; color: #5E5A56;">
+                                ESTAMOS ANSIOSOS PARA CELEBRAR COM VOCÊ!</p>
+                            <p class=" font-2xl mt-4" style="text-align: center; color: #5E5A56;">
+                                Confirme sua presença até 02 de Setembro de 2023
+                            </p>
+                            <form id="form_manipulado" class="mb-4" novalidate="">
+                                <div class="form-row">
+                                    <div class="col-12 form-group-float active">
+                                        <label for="nome_cadastro">Nome<span
+                                                class="text-danger font-xl ml-1">*</span></label>
+                                        <input id="nome_cadastro" autocomplete="off"
+                                               name="nome_cadastro"
+                                               class="email form-control input-padrao" required="">
+                                        <div class="invalid-feedback">Informe um Nome válido</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 form-group-float active">
+                                        <label for="email_cadastro">E-mail<span
+                                                class="text-danger font-xl ml-1">*</span></label>
+                                        <input type="email" id="email_cadastro" autocomplete="off"
+                                               name="email_cadastro" placeholder="nome@gmail.com"
+                                               class="email form-control input-padrao" required="">
+                                        <div class="invalid-feedback">Informe um E-mail válido</div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-12 form-group-float active">
+                                        <label for="telefone_cadastro">Celular<span
+                                                class="text-danger font-xl ml-1">*</span></label>
+                                        <input type="text" minlength="16" maxlength="16" placeholder="(41) 9 9999-9999"
+                                               id="telefone_cadastro" inputmode="numeric"
+                                               class="form-control input-padrao telefone" name="telefone_cadastro"
+                                               required="">
+                                        <div class="invalid-feedback">Informe um celular válido</div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-12 form-group-float active">
+                                        <label style="font-size: 12px"for="observacao_cadastro">Deixe aqui sua mensagem! (Opcional)</label>
+                                        <textarea type="text" id="observacao_cadastro" class="form-control input-padrao"
+                                                  name="observacao_cadastro" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <a id="btn_submit_form"
+                                       class="btn btn-success-inv btn-block text-white cursor-pointer mt-1 element-no-transform font-weight-semibold"
+                                       onclick="$('#form_manipulado').submit()">
+                                        Confirmar Presença!
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="rodape">
+        <div id="intro">
+            <div class="container" data-behavior="fade-on-scroll" data-speed="10">
+                <div class="row mt-3">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 col-sm-12">
+                        <div style="text-align: center;font-family:serif; color: #9EA899;">
+                            <p class="font-2xl font-weight-bold mt-2 mb-3" style=" color: #5E5A56;">Stephanie & Lucas</p>
+                            <p class="font-xl mt-1 mb-3" style=" color: #5E5A56;">Curitiba - PR - 2023</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+
+        $("[name='sexo']").on("change", function () {
+            $("[name='sexo']").removeClass("is-invalid")
+        }), $("#termo-uso").on("change", function () {
+            this.checked ? $("#btn-cadastrar").removeAttr("disabled") : $("#btn-cadastrar").attr("disabled", "true")
+        }), $(".cpf").mask("000.000.000-00"), $(".telefone").mask("(00) 0 0000-0000"), $(".cep").mask("00.000-000"), $(".rg").mask("00.000.000-0", {placeholder: ""}), $(".dt-nascimento").mask("00/00/0000"), $(".cartao").mask("0000.0000.0000.0000"), $(".validade-num").mask("00/00"), $(".cvv").mask("000"), $(".rg").mask("00.000.000-0"), $(".number").mask("#"), $(".cnpj").mask("00.000.000/0001-00"), $(".input-busca").on("focus", function () {
+            onoffbody("off"), $(".dropdown-search").css({visibility: "visible"}), $(this).css({
+                borderRadius: "10px 10px 0px 0px",
+                borderBottom: "none"
+            })
+        });
+        var listasearch = [];
+
+    </script>
+{% endblock %}
+
