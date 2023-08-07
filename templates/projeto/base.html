@@ -40,6 +40,17 @@
             font-style: normal;
 
         }
+        @font-face {
+            font-family: 'questrial';
+            src: url('/static/font/questrial/Questrial-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+
+        * {
+            font-family: 'questrial';
+        }
     </style>
     <style>
         .btn-success {
@@ -297,7 +308,7 @@
 {% block app_header %}
     {% if request|is_mobile %}
         <header>
-            <nav style="transition: none 0s ease 0s; position: fixed; z-index: 1041; top: 0; width: 100%;background:#9EA899;">
+            <nav style="transition: none 0s ease 0s; position: fixed; z-index: 1041; top: 0; width: 100%;background:#054141;">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-12 d-flex justify-content-start mt-1 mb-1">
                         <div class="row">
@@ -311,8 +322,8 @@
                             <div class="col">
                                 <div class="bloco_meio-header w-100">
                                     <div id="content" class="text-center mt-2" style="">
-                                        <p id="together" class="font-weight-bold font-2xl">Faltam:</p>
-                                        <div id="timer" class="mt-2">
+                                        <p id="together" class="font-weight-bold font-2xl text-white">Faltam:</p>
+                                        <div id="timer" class="mt-2 text-white">
                                             <b id="d"></b> Dias
                                             <b id="h"></b> Horas
                                             <b id="m"></b> Minutos
@@ -335,15 +346,15 @@
         <div class="sidebar-mobile" style="left: -100%; padding: 0px; z-index: 1041;">
             <div class="body-sidebar">
                 <div class="d-flex justify-content-start px-3 align-items-center py-2"
-                     style="border-bottom: 2px solid #9EA899">
+                     style="border-bottom: 2px solid #054141">
                     <p class="font-3xl icon_arrow-back02 text font-weight-bold"
-                       onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" style="color: #9EA899"></p>
+                       onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" style="color: #054141"></p>
 
                     <div class="col">
                                 <div class="bloco_meio-header w-100">
                                     <div id="content" class="text-center mt-2" style="">
-                                        <p id="together" class="font-weight-bold font-2xl">Faltam:</p>
-                                        <div id="timer1" class="mt-2">
+                                        <p id="together" class="font-weight-bold  font-2xl" style="color: #054141 !important">Faltam:</p>
+                                        <div id="timer1" class="mt-2" style="color: #054141 !important">
                                             <b id="d1"></b> Dias
                                             <b id="h1"></b> Horas
                                             <b id="m1"></b> Minutos
@@ -358,47 +369,47 @@
                     <ul class="categorias-sidebar" style="padding-left:0;"><!-- HTML ITEM -->
                         <li class="has-children padrao-2036">
                             <div class="item_categoria text-center mt-4">
-                                <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#inicio">Início</a>
+                                <a style="color: #054141 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#inicio">Início</a>
                             </div>
                             </a>
                         </li><!-- HTML ITEM -->
                         <li class="has-children padrao-2036">
-                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#nossa-historia">
+                            <a style="color: #054141 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#nossa-historia">
                                 <div class="item_categoria text-center">
                                     Nossa história
                                 </div>
                             </a>
                         </li><!-- HTML ITEM -->
                         <li class="has-children padrao-2036">
-                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#galeria">
+                            <a style="color: #054141 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#galeria">
                                 <div class="item_categoria text-center">
                                     Galeria
                                 </div>
                             </a>
                         </li><!-- HTML ITEM -->
                         <li class="has-children padrao-2036">
-                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#casamento">
+                            <a style="color: #054141 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#casamento">
                                 <div class="item_categoria text-center">
                                     Casamento
                                 </div>
                             </a>
                         </li><!-- HTML ITEM -->
                         <li class="has-children padrao-2036">
-                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#localizacao">
+                            <a style="color: #054141 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#localizacao">
                                 <div class="item_categoria text-center">
                                     Localização
                                 </div>
                             </a>
                         </li><!-- HTML ITEM -->
                         <li class="has-children padrao-2036">
-                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="/presentes">
+                            <a style="color: #054141 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="/presentes">
                                 <div class="item_categoria text-center">
                                     Lista Presentes
                                 </div>
                             </a>
                         </li><!-- HTML ITEM -->
                         <li class="has-children padrao-2036">
-                            <a style="color: #546550 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#rsvp">
+                            <a style="color: #054141 !important" onclick="toggleSidebar();$(this).parent().parent().find('.active').removeClass('active');" href="#rsvp">
                                 <div class="item_categoria text-center">
                                     RSVP
                                 </div>
@@ -443,7 +454,7 @@
                     </div>
                 </div>-->
                 <!-- HTML BASE -->
-                <div class="submenu" style="background: #9EA899">
+                <div class="submenu" style="background: #ce9582">
                     <div class="container">
                         <style>
                             .link-submenu a {
@@ -465,7 +476,7 @@
                                 list-style-type: none;
                             }
                         </style>
-                        <ul class="lista-submenu w-100 d-flex align-items-center" style="background-color: #9EA899">
+                        <ul class="lista-submenu w-100 d-flex align-items-center" style="background-color: #ce9582">
                             <li class="link-submenu None text-white pl-2">
                                 <a href="#inicio"
                                    class="d-flex align-items-center font-xl">

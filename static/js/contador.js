@@ -3,7 +3,7 @@ dv.style.opacity = 1;
 var val = 0;
 
 function timer() {
-    var start = new Date(2023, 10, 5, 16, 0);
+    var start = new Date(2023, 10, 2, 16, 0);
     var t = start - new Date();
     var d = Math.floor(t / 1000 / 60 / 60 / 24);
     var h = Math.floor(t / 1000 / 60 / 60 % 24);
