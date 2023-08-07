@@ -24,4 +24,5 @@ urlpatterns = [
                   re_path(r'', include(('core.urls', 'core'), namespace="core")),
               ] \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+              + static('workspace/' + settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
               + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
