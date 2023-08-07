@@ -21,9 +21,10 @@ class HomeView(View):
 class ProdutosView(View):
     def get(self, *args, **kwargs):
         template_name = 'core/produtos.html'
-
-        produtos = BO.item.item.Item().get_all_itens()
+        ordenacao = self.request.GET.get('ordenacao')
+        produtos = BO.item.item.Item().get_all_itens(ordenacao=ordenacao)
         context = {
+            'selecionado': ordenacao if ordenacao is not None else 'nome',
             'produtos': produtos
         }
         return render(self.request, template_name=template_name, context=context)

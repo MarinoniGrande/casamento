@@ -124,12 +124,12 @@
                                 </div>
                                 <div class="col-12 col-md-8 pl-3 justify-content-between form-group-float row"
                                      id="ordenacaoSelect">
-                                    <select class="form-control input-padrao text-muted" name="ordenacao_opcoes"
+                                    <select class="form-control input-padrao text-muted" name="ordenacao_opcoes" onchange="location = this.value;"
                                             id="ordenacao_opcoes">
-                                        <option value="nome_asc">A-Z</option>
-                                        <option value="nome_asc">Z-A</option>
-                                        <option value="nome_asc">Menor Preço</option>
-                                        <option value="nome_asc">Maior Preço</option>
+                                        <option {% if selecionado == 'nome' %}selected="selected"{% endif %} value="/presentes?ordenacao=nome">A-Z</option>
+                                        <option {% if selecionado == '-nome' %}selected="selected"{% endif %} value="/presentes?ordenacao=-nome">Z-A</option>
+                                        <option {% if selecionado == 'vlr_preco_cota' %}selected="selected"{% endif %} value="/presentes?ordenacao=vlr_preco_cota">Menor Preço</option>
+                                        <option {% if selecionado == '-vlr_preco_cota' %}selected="selected"{% endif %} value="/presentes?ordenacao=-vlr_preco_cota">Maior Preço</option>
                                     </select>
                                 </div>
                             </div>
