@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.utils import timezone
 from django.views import View
 import BO.item.item
 
@@ -42,3 +43,23 @@ class ProdutosView(View):
             }
         }
         return JsonResponse(colunas, safe=False)
+
+class RSVPView(View):
+    def get(self, *args, **kwargs):
+        nome = self.request.POST.get('nome')
+        email = self.request.POST.get('email')
+        telefone = self.request.POST.get('telefone')
+        observacao = self.request.POST.get('observacao')
+        import core.models
+        nova_confirmacao = core.models.Confirmacao(
+            nome=nome,
+            email=email,
+            telefone=telefone,
+            data= timezone.now(),
+            observacao=observacao,
+        )
+        nova_confirmacao.save()
+        context = {
+            'status': True
+        }
+        return JsonResponse(context, safe=False)
