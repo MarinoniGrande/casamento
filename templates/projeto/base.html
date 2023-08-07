@@ -16,22 +16,22 @@
           rel="stylesheet">
 
     <!-- Css Font awes![](../../../../Downloads/lucas_e_pahnie.webp)ome -->
-    <link rel="stylesheet" href="{% static 'css/font-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'font/Great_Vibes/webfontkit-20230725-134155/stylesheet.css' %}">
+    <link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/font/Great_Vibes/webfontkit-20230725-134155/stylesheet.css">
     <!-- Css do componente Select2 -->
-    <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+    <link rel="stylesheet" href="/static/select2/css/select2.min.css">
 
     <!-- Ícones -->
-    <link rel="stylesheet" href="{% static 'css/fontface/icone_pin/icone_menu/icons_menu.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fontface/icone_pin/icons_pin.css' %}">
+    <link rel="stylesheet" href="/static/css/fontface/icone_pin/icone_menu/icons_menu.css">
+    <link rel="stylesheet" href="/static/css/fontface/icone_pin/icons_pin.css">
 
     <!-- Css Booststrap -->
-    <link rel="stylesheet" href="{% static 'bootstrap-4.4.1/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="/static/bootstrap-4.4.1/dist/css/bootstrap.min.css">
     <!-- Cores utilizadas no projeto --><!-- Jquery v3.5.1 versao -->
-    <script type="text/javascript" src="{% static 'js/jquery/js/jquery_3.5.1v.min.js' %}"></script>
+    <script type="text/javascript" src="/static/js/jquery/js/jquery_3.5.1v.min.js"></script>
 
     <!-- Máscaras do jquery com regexp -->
-    <script type="text/javascript" src="{% static 'js/utilitarios/mascara/mask.min.js' %}"></script>
+    <script type="text/javascript" src="/static/js/utilitarios/mascara/mask.min.js"></script>
     <style>
         @font-face {
             font-family: 'theseasons_bd';
@@ -210,14 +210,14 @@
             --amarelo-cliente: #ffd200;
 
             /* N Amarelo */
-            --cliente-icone-warning-btn: url("{% static 'img/logos_e_banners/n-amarelo.png' %}");
+            --cliente-icone-warning-btn: url("/static/img/logos_e_banners/n-amarelo.png");
 
             /* Azul */
             --cliente-color-primary: #18537d;
             --cliente-color-primary-hover: #144467;
-            --cliente-icone-primary-btn: url("{% static 'img/logos_e_banners/n-azul.png' %}");
+            --cliente-icone-primary-btn: url("/static/img/logos_e_banners/n-azul.png");
 
-            --loader-path: url("{% static 'loader/img/loader.gif' %}");
+            --loader-path: url("/static/loader/img/loader.gif");
         }
 
         .mega-ofertas {
@@ -228,28 +228,28 @@
             display: none
         }
     </style>
-    <link rel="stylesheet" href="{% static 'css/cores.css' %}">
+    <link rel="stylesheet" href="/static/css/cores.css">
 
     <!-- Css OWL Carousel -->
-    <link rel="stylesheet" href="{% static 'OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="/static/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="/static/css/style.css">
 
     <!-- Toastr, Alerta de sucesso ou error css -->
-    <link rel="stylesheet" href="{% static 'toastr/css/toastr.min.css' %}">
+    <link rel="stylesheet" href="/static/toastr/css/toastr.min.css">
 
     <!-- datepicker -->
-    <link rel="stylesheet" href="{% static 'datepicker/css/datepicker.min.css' %}">
-    <link rel="stylesheet" href="{% static 'ecommerce_menu/css/style.css' %}">
+    <link rel="stylesheet" href="/static/datepicker/css/datepicker.min.css">
+    <link rel="stylesheet" href="/static/ecommerce_menu/css/style.css">
 
     <!-- Jquery UI -->
-    <script type="text/javascript" src="{% static 'js/jquery/js/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="/static/js/jquery/js/jquery-ui.min.js"></script>
 
-    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
-    <script src="{% static 'leaflet/leaflet.js' %}"></script>
+    <link rel="stylesheet" href="/static/leaflet/leaflet.css">
+    <script src="/static/leaflet/leaflet.js"></script>
 
 
     <script>
@@ -547,31 +547,31 @@
 {% endblock %}
 {% block importacoes_js %}
 
-    <script type="text/javascript" src="{% static 'OwlCarousel2-2.3.4/dist/owl.carousel.min.js' %}"></script>
+    <script type="text/javascript" src="/static/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
 
-    <script type="text/javascript" src="{% static 'js/contador.js' %}"></script>
+    <script type="text/javascript" src="/static/js/contador.js"></script>
 
     <!-- Toastr, alertas de sucesso e erros JS -->
-    <script defer type="text/javascript" src="{% static 'toastr/js/toastr.min.js' %}"></script>
+    <script defer type="text/javascript" src="/static/toastr/js/toastr.min.js"></script>
 
     <!-- Popper js -->
-    <script defer type="text/javascript" src="{% static 'js/popper/js/popper.min.js' %}"></script>
+    <script defer type="text/javascript" src="/static/js/popper/js/popper.min.js"></script>
 
     <!-- Bootstrap js -->
-    <script type="text/javascript" src="{% static 'bootstrap-4.4.1/dist/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="/static/bootstrap-4.4.1/dist/js/bootstrap.min.js"></script>
 
     <!-- Imprimir js -->
     <script defer type="text/javascript"
-            src="{% static 'js/utilitarios/exportar_imprimir/printThis.min.js' %}"></script>
+            src="/static/js/utilitarios/exportar_imprimir/printThis.min.js"></script>
 
     <!-- Popover js -->
-    <script defer type="text/javascript" src="{% static 'js/popover/popovers.min.js' %}"></script>
+    <script defer type="text/javascript" src="/static/js/popover/popovers.min.js"></script>
 
     <!-- Select2 -->
-    <script type="text/javascript" src="{% static 'select2/js/select2.min.js' %}"></script>
+    <script type="text/javascript" src="/static/select2/js/select2.min.js"></script>
 
     <!-- Title -->
-    <script defer type="text/javascript" src="{% static 'js/utilitarios/formatar/title.min.js' %}"></script>
+    <script defer type="text/javascript" src="/static/js/utilitarios/formatar/title.min.js"></script>
 
     <script>
         function carregar_carrossel() {
