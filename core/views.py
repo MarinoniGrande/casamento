@@ -77,7 +77,6 @@ class RSVPView(View):
         import smtplib
 
         sender = "nmgrande@hotmail.com"
-        recipient = "nicolas.grande@inteliger.com.br"
         message = f"""
              Nome: {nome}
              E-mail: {email}
@@ -87,17 +86,56 @@ class RSVPView(View):
              
         """
 
-        email = EmailMessage()
-        email["From"] = sender
-        email["To"] = recipient
-        email["Subject"] = f"""Nova confirmação de presença!"""
-        email.set_content(message)
+        try:
+            email = EmailMessage()
+            recipient = "nicolas.grande@inteliger.com.br"
+            email["From"] = sender
+            email["To"] = recipient
+            email["Subject"] = f"""Nova confirmação de presença!"""
+            email.set_content(message)
 
-        smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
-        smtp.starttls()
-        smtp.login(sender, "Nicol@smg99!!")
-        smtp.sendmail(sender, recipient, email.as_string())
-        smtp.quit()
+            smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
+            smtp.starttls()
+            smtp.login(sender, "Nicol@smg99!!")
+
+            smtp.sendmail(sender, recipient, email.as_string())
+            smtp.quit()
+        except:
+            pass
+        try:
+            email = EmailMessage()
+            recipient = "lucas.hertel@outlook.com"
+            email["From"] = sender
+            email["To"] = recipient
+            email["Subject"] = f"""Nova confirmação de presença!"""
+            email.set_content(message)
+
+            smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
+            smtp.starttls()
+            smtp.login(sender, "Nicol@smg99!!")
+
+
+
+            smtp.sendmail(sender, recipient, email.as_string())
+            smtp.quit()
+        except:
+            pass
+        try:
+            email = EmailMessage()
+            recipient = "stephaniemueller@gmail.com"
+            email["From"] = sender
+            email["To"] = recipient
+            email["Subject"] = f"""Nova confirmação de presença!"""
+            email.set_content(message)
+
+            smtp = smtplib.SMTP("smtp-mail.outlook.com", port=587)
+            smtp.starttls()
+            smtp.login(sender, "Nicol@smg99!!")
+
+            smtp.sendmail(sender, recipient, email.as_string())
+            smtp.quit()
+        except:
+            pass
 
         context = {
             'status': True
