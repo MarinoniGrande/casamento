@@ -217,7 +217,7 @@
             --cliente-color-primary-hover: #144467;
             --cliente-icone-primary-btn: url("/static/img/logos_e_banners/n-azul.png");
 
-            --loader-path: url("/static/loader/img/loader.gif");
+            --loader-path: url("/static/loader/img/VAyR.gif");
         }
 
         .mega-ofertas {
@@ -253,6 +253,8 @@
 
 
     <script>
+        function objectifyForm(t) { let e = {}; for (var i = 0; i < t.length; i++)t[i].value && (e[t[i].name] = t[i].value); return e }
+
         Number.prototype.toLocaleFixed = function (o) {
             return "number" == typeof parseFloat(this) ? parseFloat(this).toLocaleString("pt-BR", {
                 minimumFractionDigits: o,

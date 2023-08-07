@@ -3,7 +3,35 @@
 {% load static %}
 {% load user_agents %}
 
+
 {% block app_body %}
+    <script>
+    function load(status, elem, prop) {
+        let loader;
+        if (elem.length > 0) {
+            if (elem[0].tagName === "MAIN" || elem[0].tagName === "BODY" || elem[0].tagName === "HTML") {
+                loader = `<div class="load load-body" style="position:fixed !important;">
+                            <div class="toriload"></div>
+                          </div>`;
+            } else {
+                loader = `<div class="load" style="position:absolute !important;${prop ? prop : ""}">
+                            <div class="toriload"></div>
+                          </div>`;
+            }
+            switch (status) {
+                case "off":
+                    elem.find('.load').remove();
+                    break;
+                case "on":
+                    elem.prepend(loader);
+                    break;
+                default:
+                    elem.prepend(loader);
+            }
+        }
+    }
+</script>
+
     <style>
         .btn-success {
             color: var(--no-white);
@@ -299,7 +327,8 @@
             </div>
         </div>
     </section>
-    <section id="localizacao" style="background:  url('/static/imagens/fundo.webp') no-repeat center fixed;    background-size: cover;">
+    <section id="localizacao"
+             style="background:  url('/static/imagens/fundo.webp') no-repeat center fixed;    background-size: cover;">
         <div class="row">
             <div class="col-12 text-center" style="margin-top: 40px">
                 <span class="font-4xl font-weight-bold text-muted">COMO CHEGAR</span>
@@ -405,7 +434,9 @@
                             <p class="font-2xl" style=" color: #5E5A56;">
                                 Com amor, Phanie e Lucas.
                             </p>
-                            <a href="/presentes"><div class="btn btn-success mt-5 btn-lg font-2xl mb-5">Ver lista</div></a>
+                            <a href="/presentes">
+                                <div class="btn btn-success mt-5 btn-lg font-2xl mb-5">Ver lista</div>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-4"></div>
@@ -413,7 +444,8 @@
             </div>
         </div>
     </section>
-    <section id="rsvp" style="background: url('/static/imagens/rvsp.jpg') no-repeat center fixed;    background-size: cover;">
+    <section id="rsvp"
+             style="background: url('/static/imagens/rvsp.jpg') no-repeat center fixed;    background-size: cover;">
         <div id="">
             <div class="container" data-behavior="fade-on-scroll" data-speed="10">
                 <div class="row mt-3 ">
@@ -462,7 +494,8 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-12 form-group-float active">
-                                        <label style="font-size: 12px"for="observacao_cadastro">Deixe aqui sua mensagem! (Opcional)</label>
+                                        <label style="font-size: 12px" for="observacao_cadastro">Deixe aqui sua
+                                            mensagem! (Opcional)</label>
                                         <textarea type="text" id="observacao_cadastro" class="form-control input-padrao"
                                                   name="observacao_cadastro" rows="3"></textarea>
                                     </div>
@@ -489,7 +522,8 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4 col-sm-12">
                         <div style="text-align: center;font-family:serif; color: #9EA899;">
-                            <p class="font-2xl font-weight-bold mt-2 mb-3" style=" color: #5E5A56;">Stephanie &  Lucas</p>
+                            <p class="font-2xl font-weight-bold mt-2 mb-3" style=" color: #5E5A56;">Stephanie &
+                                Lucas</p>
                             <p class="font-xl mt-1 mb-3" style=" color: #5E5A56;">Curitiba - PR - 2023</p>
                         </div>
                     </div>
@@ -511,6 +545,55 @@
             })
         });
         var listasearch = [];
+
+    </script>
+    <script>
+        $('#form_manipulado').on('submit', function (ev) {
+
+            ev.stopPropagation()
+            ev.preventDefault()
+
+            let tel = document.getElementById('telefone_cadastro');
+
+            if (tel.value.length < 16) {
+                tel.setCustomValidity('erro');
+                $(tel).focus();
+            } else {
+                tel.setCustomValidity('');
+            }
+
+            if (this.checkValidity()) {
+
+                load('on', $('body'));
+                setTimeout(() => {
+                    $.ajax({
+                        type: "POST",
+                        url: "/rsvp",
+                        data: Object.assign({}, objectifyForm($(this).serializeArray())),
+                        success: function (response) {
+                            if (response.status) {
+                                load('off', $('body'));
+                                toastr.success('Presença confirmada com sucesso!', 'Confirmado');
+                            } else {
+                                toastr.error('Ocorreu um erro ao realizar o envio da sua receita, por favor tente novamente mais tarde.', 'Erro ao enviar');
+                            }
+                            load('off', $('body'));
+                        },
+                        error: function (response) {
+                            load('off', $('body'));
+                            if (!response || response.statusText !== 'error') {
+                                toastr.error('Ocorreu um erro ao realizar o envio da sua receita.', 'Erro ao enviar');
+                            }
+                        }
+                    });
+                }, 3000);
+            } else {
+                toastr.warning('Preencha todos os campos obrigatórios para prosseguir.')
+            }
+
+            this.classList.add('was-validated');
+
+        })
 
     </script>
 {% endblock %}
