@@ -55,9 +55,9 @@ class RSVPView(View):
         import core.models
         data = (timezone.now() + timezone.timedelta(hours=-3)).strftime('%d/%m/%Y %H:%M:%S')
         nova_confirmacao = core.models.Confirmacao(
-            nome=nome,
-            email=email,
-            telefone=telefone,
+            nome=nome[:200] if nome is not None else '',
+            email=email[:200] if email is not None else '',
+            telefone=telefone[:200] if telefone is not None else '',
             data= data,
             observacao=observacao,
         )
@@ -132,3 +132,19 @@ class RSVPView(View):
             'status': True
         }
         return JsonResponse(context, safe=False)
+
+
+class ProdutosConfirmarView(View):
+    def get(self, *args, **kwargs):
+        template_name = 'core/confirmacao.html'
+        lista = BO.item.item.Item().buscar_compras()
+        context = {
+            'lista': lista
+        }
+        return render(self.request, template_name=template_name, context=context)
+
+    def post(self, *args, **kwargs):
+        item_id = self.request.POST.get('item_id')
+        nome = self.request.POST.get('nome')
+        status = BO.item.item.Item().confirmar_compra(item_id=item_id, nome=nome)
+        return JsonResponse({'status': status}, safe=False)

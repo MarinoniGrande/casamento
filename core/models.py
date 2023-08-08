@@ -14,10 +14,16 @@ class Produto(models.Model):
     categoria = models.CharField(max_length=200, null=True)
 
 
-class ProdutoQRCode(models.Model):
+class ProdutoConfirmacao(models.Model):
     produto = models.ForeignKey('Produto', on_delete=models.DO_NOTHING, null=True)
     qtd_cota = models.IntegerField(null=True)
     imagem = models.CharField(max_length=200, null=True)
+
+
+class ProdutoQRCode(models.Model):
+    produto = models.ForeignKey('Produto', on_delete=models.DO_NOTHING, null=True)
+    data  = models.CharField(max_length=200, null=True)
+    nome  = models.CharField(max_length=200, null=True)
 
 
 class Confirmacao(models.Model):
