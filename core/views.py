@@ -30,20 +30,10 @@ class ProdutosView(View):
         return render(self.request, template_name=template_name, context=context)
 
     def post(self, *args, **kwargs):
-        colunas = {
-            "colunas": {
-                "categoria": {
-                    "nome": "Categoria",
-                    "ordem": 2,
-                    "tipo": None,
-                    "valores": {
-                        "PRESERVATIVO": 69,
-                        "LUBRIFICANTE ÍNTIMO": 26
-                    }
-                }
-            }
-        }
-        return JsonResponse(colunas, safe=False)
+        item_id = self.request.POST.get('item_id')
+
+        qtd_clicks = BO.item.item.Item().adicionar_click(item_id=item_id)
+        return JsonResponse({'status': True, 'qtd_clicks': qtd_clicks}, safe=False)
 
 class RSVPView(View):
     def get(self, *args, **kwargs):

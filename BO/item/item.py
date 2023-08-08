@@ -15,5 +15,14 @@ class Item:
         return lista
 
 
-    def get_colunas(self, ):
-        return {}
+    def adicionar_click(self, item_id=None):
+        item = core.models.Produto.objects.all().filter(id=item_id).first()
+        if item is None:
+            return 0
+        else:
+            if item.qtd_clicks is None:
+                item.qtd_clicks = 0
+            item.qtd_clicks += 1
+            item.save()
+
+            return item.qtd_clicks
