@@ -17,7 +17,7 @@
                             <p><span class="font-weight-bold">Nome:</span> {{ l.nome }}</p>
                             <p><span class="font-weight-bold">E-mail:</span> {{ l.email }}</p>
                             <p><span class="font-weight-bold">Telefone:</span> {{ l.telefone }}</p>
-                            <p><span class="font-weight-bold">Observação:</span> {{ l.observacao }}</p>
+                            <p><span class="font-weight-bold">Observação:{% if l.observacao != None and l.observacao != '' %}</span> {{ l.observacao }}</p>{% else %}<span>--</span>{% endif %}
                             <p><span class="font-weight-bold">Data:</span> {{ l.data }}</p>
                         </div>
                         <hr>

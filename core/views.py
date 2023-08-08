@@ -83,7 +83,7 @@ class RSVPView(View):
              E-mail: {email}
              Telefone: {telefone}
              Data: {data}
-             Observação: {observacao}
+             Observação: {observacao if observacao not in ['None', None, ''] else '--'}
              
         """
 
