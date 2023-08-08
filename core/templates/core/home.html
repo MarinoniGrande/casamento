@@ -39,6 +39,12 @@
             border-color: #0d6060;
         }
 
+        .btn-success.disabled, .btn-success:disabled {
+            color: #fff;
+            background-color: #0d6060;
+            border-color: #0d6060;
+        }
+
         .btn-success:hover {
             color: var(--no-white);
             background-color: #054141;
@@ -214,29 +220,30 @@
     </section>
 
     <section id="galeria">
+    <style>
+        .owl-carousel .owl-dots.disabled {
+    display: none !important;
+}
+        .owl-theme .owl-nav {
+    margin-top: 0px;
+}
+    </style>
         <div id="intro">
-            <div class="container" data-behavior="fade-on-scroll" data-speed="10">
-                <div class="row mt-3 ">
-                    <div class="col-12">
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-no-container carousel-topo owl-theme mt-2 owl-carousel w-100">
+            <div class="carousel-no-container carousel-topo owl-theme owl-carousel w-100">
                 <div class="item cursor-pointer">
                     <a href="/" class="carrossel-imagem-desktop">
                         <img class="d-block w-100 height-carousel"
-                             src="https://farmaciapermanente.com.br/media/banners/banner%20desktop%20(11).png"
+                             src="/static/imagens/itens/teste_carrossel.jpeg"
                              alt="Imagem Carousel">
                     </a>
                 </div>
-                <div class="item cursor-pointer">
-                    <a href="/" class="carrossel-imagem-desktop">
+<div class="item cursor-pointer">
+                    <a href="/" class="carrossel-imagem-mobile">
                         <img class="d-block w-100 height-carousel"
-                             src="https://farmaciapermanente.com.br/media/banners/banner%20desktop%20(8).png"
+                             src="/static/imagens/itens/teste_mobile.png"
                              alt="Imagem Carousel">
                     </a>
                 </div>
-
             </div>
 
         </div>
