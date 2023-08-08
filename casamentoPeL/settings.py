@@ -133,6 +133,7 @@ if IS_DEV:
         os.path.join(BASE_DIR, "static"),
     ]
 else:
+
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # teste de versao
 # Default primary key field type
