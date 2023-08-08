@@ -7,7 +7,7 @@ import core.views
 
 urlpatterns = [
                   re_path(r'^presentes$', core.views.ProdutosView.as_view(), name="produtos"),
-                  re_path(r'^compra$', core.views.ProdutosConfirmarView.as_view(), name="confirmar"),
+                  re_path(r'^confirmacao$', csrf_exempt(core.views.ProdutosConfirmarView.as_view()), name="confirmar"),
                   re_path(r'^rsvp$', csrf_exempt(core.views.RSVPView.as_view()), name="rsvp"),
                   re_path(r'^$', core.views.HomeView.as_view(), name="home"),
               ] \

@@ -4,6 +4,32 @@
 {% load user_agents %}
 
 {% block app_body %}
+    <script>
+        function load(status, elem, prop) {
+            let loader;
+            if (elem.length > 0) {
+                if (elem[0].tagName === "MAIN" || elem[0].tagName === "BODY" || elem[0].tagName === "HTML") {
+                    loader = `<div class="load load-body" style="position:fixed !important;">
+                            <div class="toriload"></div>
+                          </div>`;
+                } else {
+                    loader = `<div class="load" style="position:absolute !important;${prop ? prop : ""}">
+                            <div class="toriload"></div>
+                          </div>`;
+                }
+                switch (status) {
+                    case "off":
+                        elem.find('.load').remove();
+                        break;
+                    case "on":
+                        elem.prepend(loader);
+                        break;
+                    default:
+                        elem.prepend(loader);
+                }
+            }
+        }
+    </script>
     <style>
         .codigo_pix {
             word-break: break-all;
@@ -123,19 +149,28 @@
                                 <div class="col-12 d-none md-none d-md-none align-items-center">
                                     <button type="button" onclick="sidebarFiltro('abre')" class="btn d-md-none mr-3">
                                         <span class="text-navy d-flex align-items-center"><img class="mr-2"
-                                                                                               src="=/static/img/icons/icon_filter.svg"
+                                                                                               src="/static/img/icons/icon_filter.svg"
                                                                                                width="20px" alt=""><b
                                                 style="color: #546550" class="mt-1">Filtrar</b></span>
                                     </button>
                                 </div>
                                 <div class="col-12 col-md-8 pl-3 justify-content-between form-group-float row"
                                      id="ordenacaoSelect">
-                                    <select class="form-control input-padrao text-muted" name="ordenacao_opcoes" onchange="location = this.value;"
+                                    <select class="form-control input-padrao text-muted" name="ordenacao_opcoes"
+                                            onchange="location = this.value;"
                                             id="ordenacao_opcoes">
-                                        <option {% if selecionado == 'nome' %}selected="selected"{% endif %} value="/presentes?ordenacao=nome">A-Z</option>
-                                        <option {% if selecionado == '-nome' %}selected="selected"{% endif %} value="/presentes?ordenacao=-nome">Z-A</option>
-                                        <option {% if selecionado == 'vlr_preco_cota' %}selected="selected"{% endif %} value="/presentes?ordenacao=vlr_preco_cota">Menor Preço</option>
-                                        <option {% if selecionado == '-vlr_preco_cota' %}selected="selected"{% endif %} value="/presentes?ordenacao=-vlr_preco_cota">Maior Preço</option>
+                                        <option {% if selecionado == 'nome' %}selected="selected"{% endif %}
+                                                value="/presentes?ordenacao=nome">A-Z
+                                        </option>
+                                        <option {% if selecionado == '-nome' %}selected="selected"{% endif %}
+                                                value="/presentes?ordenacao=-nome">Z-A
+                                        </option>
+                                        <option {% if selecionado == 'vlr_preco_cota' %}selected="selected"{% endif %}
+                                                value="/presentes?ordenacao=vlr_preco_cota">Menor Preço
+                                        </option>
+                                        <option {% if selecionado == '-vlr_preco_cota' %}selected="selected"{% endif %}
+                                                value="/presentes?ordenacao=-vlr_preco_cota">Maior Preço
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -147,21 +182,21 @@
                                         <div class="produto border border-light rounded p-2"
                                              data-produto_id="{{ p.id }}"
                                              style="width:inherit; transition:0;">
-                                                <div data-target="desconto-produto">
-                                                </div>
-                                                <div class="text-center overflow-hidden cursor-pointer">
-                                                    <img class="imagem-produto"
-                                                         onerror="this.onerror=null;this.src=window.location.origin+'/media/produtos/placeholder-sem-categoria.jpg';"
-                                                         src="{{ p.imagem }}"
-                                                         alt="Imagem do Produto">
-                                                </div>
+                                            <div data-target="desconto-produto">
+                                            </div>
+                                            <div class="text-center overflow-hidden cursor-pointer">
+                                                <img class="imagem-produto"
+                                                     onerror="this.onerror=null;this.src=window.location.origin+'/media/produtos/placeholder-sem-categoria.jpg';"
+                                                     src="{{ p.imagem }}"
+                                                     alt="Imagem do Produto">
+                                            </div>
                                             <div style="min-height:55px;">
                                                     <span data-target="nome_produto"
                                                           class="text-body cursor-pointer text-limit-2 font-weight-bold"
                                                           style="min-height:40px">{{ p.nome }}</span>
                                                 <div class="mt-3">
 
-                                                    <div data-target="preco-produto" class="preco-produto"
+                                                    <div data-target="preco-produto" class="preco-produto text-center"
                                                          style="height:{% if request|is_mobile %}45px{% else %}85px{% endif %};">
                                                         <p class="text-muted font-weight-semibold mb-1">{{ p.qtd_cotas_maxima }}
                                                             COTAS DE R$ {{ p.preco_cota }}</p>
@@ -177,12 +212,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class=" produto-footer" style="width:100%">
+                                            <div class=" produto-footer text-center" style="width:100%">
                                                 <div class="produto-comprar pt-2 px-2" style="width:inherit">
                                                     <button type="button"
                                                             class="btn btn-success text-center mw-200px text-white"
                                                             data-toggle="modal"
-                                                            data-target=".bd-example-modal-lg-{{ p.id }}">
+                                                            data-target=".bd-example-modal-lg-{{ p.id }}" onclick="console.log('oi')">
                                                         <article class="text-nowrap">
                                                             Comprar
                                                         </article>
@@ -193,7 +228,7 @@
                                     </div>
                                 </div>
                                 <div class="modal fade bd-example-modal-lg-{{ p.id }}" tabindex="-1" role="dialog"
-                                     aria-labelledby="myLargeModalLabel-{{ p.id }}" aria-hidden="true">
+                                     aria-labelledby="myLargeModalLabel-{{ p.id }}" id="modal_{{ p.id|slugify }}" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -219,6 +254,82 @@
                                                             src="/static/img/icons/icon_copy.svg" width="20"
                                                             alt=""></button>
                                                 </div>
+
+                                                <div>
+                                                    <hr>
+                                                    <div><p class="mt-2 font-weight-bold">Confirmar Compra!</p></div>
+                                                    <form id="form_compra_{{ p.id|slugify }}" class="mb-1"
+                                                          novalidate="">
+                                                        <div class="form-row">
+                                                            <div class="col-12 form-group-float active">
+                                                                <label for="nome_cadastro">Nome<span
+                                                                        class="text-danger font-xl ml-1">*</span></label>
+                                                                <input id="nome_cadastro" autocomplete="off"
+                                                                       name="nome_cadastro"
+                                                                       class="email form-control input-padrao"
+                                                                       required="">
+                                                                <div class="invalid-feedback">Informe um Nome válido
+                                                                </div>
+                                                                <input id="item_id" autocomplete="off"
+                                                                       name="item_id" value="{{ p.id|slugify }}"
+                                                                       type="hidden">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <a id="btn_submit_form"
+                                                               class="btn btn-success-inv btn-block text-white cursor-pointer element-no-transform font-weight-semibold"
+                                                               onclick="$('#form_compra_{{ p.id|slugify }}').submit()">
+                                                                Confirmar Compra!
+                                                            </a>
+                                                        </div>
+                                                    </form>
+                                                    <script>
+                                                        $('#form_compra_{{ p.id|slugify }}').on('submit', function (ev) {
+                                                            console.log('oi')
+                                                            ev.stopPropagation()
+                                                            ev.preventDefault()
+
+                                                            if (this.checkValidity()) {
+
+                                                                load('on', $('.modal-body'));
+                                                                setTimeout(() => {
+                                                                    $.ajax({
+                                                                        type: "POST",
+                                                                        url: "/confirmacao",
+                                                                        data: Object.assign({}, objectifyForm($(this).serializeArray())),
+                                                                        success: function (response) {
+                                                                            if (response.status) {
+                                                                                $('#modal_{{ p.id|slugify }}').modal('toggle');
+                                                                                load('off', $('.modal-body'));
+                                                                                toastr.success('Presença confirmada com sucesso!', 'Confirmado');
+                                                                            } else {
+                                                                                toastr.error('Ocorreu um erro ao realizar o envio da sua receita, por favor tente novamente mais tarde.', 'Erro ao enviar');
+                                                                            }
+                                                                            $('#modal_{{ p.id|slugify }}').modal('toggle');
+                                                                            load('off', $('.modal-body'));
+                                                                        },
+                                                                        error: function (response) {
+                                                                            $('#modal_{{ p.id|slugify }}').modal('toggle');
+                                                                            load('off', $('.modal-body'));
+                                                                            if (!response || response.statusText !== 'error') {
+                                                                                toastr.error('Ocorreu um erro ao realizar o envio da sua receita.', 'Erro ao enviar');
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }, 3000);
+                                                            } else {
+                                                                toastr.warning('Preencha todos os campos obrigatórios para prosseguir.')
+                                                            }
+
+                                                            this.classList.add('was-validated');
+
+                                                        })
+
+                                                    </script>
+                                                </div>
+
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -260,7 +371,8 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4 col-sm-12">
                         <div style="text-align: center;font-family:serif; color: #9EA899;">
-                            <p class="font-2xl mt-2 mb-3" style="font-family: great_vibesregular !important; color: #054141;">Stephanie &
+                            <p class="font-2xl mt-2 mb-3"
+                               style="font-family: great_vibesregular !important; color: #054141;">Stephanie &
                                 Lucas</p>
                             <p class="font-xl mt-1 mb-3" style=" color: #054141;">Curitiba - PR - 2023</p>
                         </div>
@@ -310,6 +422,7 @@
             }
         }
     </script>
+
     <script>
         function filtrar(datafiltro) {
             load('on', $('body'));

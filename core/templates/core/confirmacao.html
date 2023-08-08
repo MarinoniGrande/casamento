@@ -1,0 +1,383 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load user_agents %}
+
+{% block app_body %}
+<div class="app-body"
+     style="padding-top: {% if request|is_mobile %}80px{% else %}40px{% endif %} !important;">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+    <main class="main">
+        <div class="container w-100 {% if request|is_mobile and request.path != '/' %}mt-n3{% else %}mt-2{% endif %}"
+             id="main-container" >
+            <p class="font-2xl mt-3 mb-2 text-center font-weight-bold">Confirmados:</p>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                    <th class="text-center">Contador</th>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Data</th>
+                    <th class="text-center">Produto</th>
+                    <th class="text-center">Valor</th>
+                </tr>
+                {% for l in lista %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ l.nome }}</td>
+                        <td>{{ l.data }}</td>
+                        <td>{{ l.produto__nome }}</td>
+                        <td>R$ {{ l.produto__preco_cota }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+    </main>
+</div>
+<section id="rodape">
+    <div id="intro">
+        <div class="container" data-behavior="fade-on-scroll" data-speed="10">
+            <div class="row mt-3">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 col-sm-12">
+                    <div style="text-align: center;font-family:serif; color: #9EA899;">
+                        <p class="font-2xl font-weight-bold mt-2 mb-3" style=" color: #5E5A56;">Stephanie &
+                            Lucas</p>
+                        <p class="font-xl mt-1 mb-3" style=" color: #5E5A56;">Curitiba - PR - 2023</p>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function copyToClipboard(event, value) {
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(value);
+    }
+
+
+    function atualizarChave(dict) {
+        $.each(dict, function (chave, valor) {
+            if (data_global.hasOwnProperty(chave)) {
+            } else {
+                data_global[chave] = [];
+            }
+            data_global[chave] = valor;
+        });
+    }
+
+    const termo_pesquisado = window.location.pathname.replace('/', '', 1).replace(/\s/g, '-').trim();
+    var data_global = {
+        'csrfmiddlewaretoken': '{{ csrf_token }}',
+        'termo': termo_pesquisado,                            // o que foi pesquisado
+        'pagina': 1,
+        'ordenacao': '',                                 // se nao enviar nada retorno a primeira,
+        'is_termo': true,
+    };
+
+
+    function sidebarFiltro(acao) {
+        if (acao === 'abre') {
+            var top = $("header").height();
+            $("body").css('position', 'fixed');
+            $(".filter_search").css({left: '0', zIndex: '100', top: top, paddingTop: '80px'});
+            onoffbody('off');
+        } else {
+            $("body").css('position', 'relative');
+            $(".filter_search").css({left: '-100%'});
+            onoffbody('on');
+        }
+    }
+</script>
+<script>
+    function filtrar(datafiltro) {
+        load('on', $('body'));
+        atualizarFiltros(datafiltro);
+        $.ajax({
+            type: "POST",
+            url: "",
+            data: datafiltro,
+            success: function (data) {
+                console.log(data)
+                $("#pagina_atual").val(data.pagina_atual);
+                if (1 == 1) {
+                    $("#search-produtos").html('');
+                    for (value of data.produtos) {
+                        console.log(value)
+                        var img_produto = "produtos/caixa-nissei.jpg";
+                        if (value._source.imagem_produto !== "" && value._source.imagem_produto !== null && value._source.imagem_produto !== undefined) {
+                            img_produto = value._source.imagem_produto;
+                        }
+                        $("#search-produtos").append(`<div class="col-6 col-md-3 px-0">
+                <div class="item p-2" style="width:inherit">
+                    <div class="produto border border-light rounded p-2" data-produto_id="${value._source.cd_produto}" style="width:inherit">
+                        <a href="/${value._source.url_produto}">
+                            <div data-target="desconto-produto">
+                            </div>
+                            <div class="text-center overflow-hidden cursor-pointer">
+                                <img  onerror="this.onerror=null;this.src=window.location.origin+'/media/produtos/placeholder-sem-categoria.jpg';" class="imagem-produto" src="/media/${img_produto}"  alt="Imagem do Produto">
+                            </div>
+                        </a>
+                        <div style="min-height:55px;">
+
+                            <a href="/${value._source.url_produto}">
+                                <span data-target="nome_produto" class="text-body cursor-pointer text-limit-2" style="min-height:40px">${value._source.nm_produto}</span>
+                            </a>
+							<div class="my-3">
+                        		<a href="/marcas/${value._source.marca_url}">
+                        			<span class="font-weight-bold texto-valor-padrao">${value._source.marca_nm_descritivo}</span>
+								</a>
+							</div>
+                            <div class="mt-3">
+
+                                <div data-target="preco-produto" class="preco-produto" style="height:95px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" produto-footer" style="width:100%">
+                            <div class="produto-comprar px-2 border-top border-light pt-3" style="width:inherit">
+                                <button class="btn btn-warning text-white d-block text-center mx-auto font-weight-bold"
+                                        data-loading-text="<article><i class='fa fa-spinner fa-spin '></i> aguarde...</article>" data-target="btn-comprar" data-qtd_produto="1">
+                                    <article>Comprar</article></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`);
+
+                    }
+                    var paginas = '';
+                    if (data.pagina_atual !== 1) {
+                        paginas += '<a href="javascript:void(0)" data-pagina="prev">&larr;</a>';
+                    }
+                    var atual = +data.pagina_atual;
+                    var last = +data.paginas.length;
+                    if (last !== 1) {
+                        var cont = 0;
+                        for (var i = 1; i <= last; i++) {
+                            if (i === atual) {
+                                cont++
+                                paginas += '<a  href="javascript:void(0)" data-pagina="' + i + '" class="active  ">' + i + '</a>';
+                            } else {
+                                if (atual === last || atual - (last - 1) === 0) {
+                                    if (i + 4 > atual) {
+                                        cont++
+                                        if (cont <= 5) {
+                                            paginas += '<a  href="javascript:void(0)" data-pagina="' + i + '" class="">' + i + '</a>';
+                                        }
+                                    }
+                                } else if (i + 2 >= atual) {
+                                    cont++
+                                    if (cont <= 5) {
+                                        paginas += '<a  href="javascript:void(0)" data-pagina="' + i + '" class="">' + i + '</a>';
+                                    }
+                                }
+                            }
+                        }
+                        if (atual !== last) {
+                            paginas += '<a href="javascript:void(0)" data-pagina="next">&rarr;</a>';
+                        }
+                    } else {
+                        paginas += ' <a  href="javascript:void(0)" data-pagina="' + atual + '" class=" active ">' + atual + '</a>';
+                    }
+                    $('.pagination-padrao').html(paginas);
+                    $("[data-pagina]").on('click', function (event) {
+                        let filtros = {};
+                        $("#filter_search [name]:checked").get().forEach(function (e, a) {
+                            var filtro = $(e).attr('name');
+                            if (filtros.hasOwnProperty("termo-" + filtro)) {
+
+                            } else {
+                                filtros["termo-" + filtro] = [];
+                            }
+                            filtros["termo-" + filtro].push($(e).val());
+                        });
+                        atualizarChave(filtros)
+                        var valor = event.target.getAttribute('data-pagina');
+                        var atual = +$("#pagina_atual").val();
+
+                        if (valor === 'next') {
+                            valor = atual + 1;
+                        }
+                        if (valor === 'prev' && atual > 1) {
+                            valor = atual - 1;
+                        }
+                        valor = +valor;
+                        data_global['pagina'] = valor;
+                        filtrar(data_global);
+                    });
+
+                }
+
+                //data.produtos: lista de dicionario de produtos,
+                //data.quantidade: quantidade de paginas,
+                //data.pagina_atual: pagina atual da pesquisa,
+                //data.termo: termo pesquisado,
+                //data.tempo_total Tempo que durou a pesquisa,
+                //data.paginas Todas as paginas existentes na pesquisa
+
+                //Scroll top 0
+                $('html, body').animate({scrollTop: (0)}, 1000);
+                load('off', $('body'))
+                pegarPrecosAtribuirDescontos()
+
+            },
+            error: function (data) {
+                load('off', $('.asidebar'));
+                load('off', $('body'));
+                if (data.statusText !== 'error') {
+                    doSubmit = false;
+                }
+            }
+        });
+    }
+
+    $("[data-pagina]").on('click', function (event) {
+        let filtros = {};
+        $("#filter_search [name]:checked").get().forEach(function (e, a) {
+            var filtro = $(e).attr('name');
+            if (filtros.hasOwnProperty("termo-" + filtro)) {
+
+            } else {
+                filtros["termo-" + filtro] = [];
+            }
+            filtros["termo-" + filtro].push($(e).val());
+        });
+        atualizarChave(filtros);
+        console.log(filtros);
+
+        var valor = event.target.getAttribute('data-pagina');
+        var atual = +$("#pagina_atual").val();
+
+        if (valor === 'next') {
+            valor = atual + 1;
+        }
+        if (valor === 'prev' && atual > 1) {
+            valor = atual - 1;
+        }
+        valor = +valor;
+        data_global['pagina'] = valor;
+        console.log(data_global);
+        filtrar(data_global);
+    });
+
+    $('#ordenacao_opcoes').on('change', function () {
+        var valor = this.value
+        data_global['ordenacao'] = valor;
+
+        filtrar(data_global);
+    })
+
+    async function atualizarFiltros(data_envio) {
+        var checkeds = [];
+        if ($('[type="checkbox"]').get().length > 0) {
+            $('[type="checkbox"]:checked').get().forEach(function (e) {
+                checkeds.push($(e).attr('id'));
+            });
+        }
+        $.ajax({
+            type: "POST",
+            url: "/presentes", // ajax de retornar as colunas com a quantidade e ordenado na ordem que deve ser, a chave do diciionario é o que deve ser enviado no ajax de pesquisar como 'termo-coluna'
+            data: data_envio,
+            success: function (data) {
+                $("#filter_search").html('');
+                $.each(data.colunas, function (value) {
+                    var valores = Object.entries(this.valores);
+                    var htmlcheck = '';
+                    var cont = 0;
+                    if (valores.length > 0) {
+                        for (valor of valores) {
+                            cont++;
+                            if (cont === 6) {
+                                htmlcheck += '<div class="collapse" id="show-hide' + value + '">'
+                            }
+                            htmlcheck += '<div class="row my-1">' +
+                                '<div class="check-ecomm">' +
+                                '<input type="checkbox" value="' + valor[0] + '" name="' + value + '" ' +
+                                'id="' + this.nome + valor[0].replace(/[`~!@#$%^&ç*()_|+\-=?;:'",.<>\{\}\[\]\\\/\s]/g, '') + '">' +
+                                '<label for="' + this.nome + valor[0].replace(/[`~!@#$%^&ç*()_|+\-=?;:'",.<>\{\}\[\]\\\/\s]/g, '') + '">' + valor[0] + '  <span style="color: #546550 !important" class=" ml-2">( ' + valor[1] + ' )</span></label>' +
+                                '</div>' +
+                                '</div>'
+                        }
+                        if (cont > 6) {
+                            htmlcheck += '</div>'
+                            htmlcheck += '<div class="col-12"> <a style="color:#546550 !important" class="show-hide_search" href="javascript:void(0)" aria-expanded="false" data-target="#show-hide' + value + '" data-toggle="collapse"><div></div>Ver tudo</a>'
+                        }
+                        $("#filter_search").append(`
+                                <div class="pesquisa-preco">
+                                <div class="row text-uppercase font-weight-bold mb-2">
+                                        <div class="col-8">
+                                                <p class="text-navy" style="color:#546550 !important">${this.nome}</p>
+                                            </div>
+
+                                    </div>
+                                    ${htmlcheck}
+                            </div>
+                    `)
+                    }
+                });
+                checkeds.forEach(function (value) {
+                    $('#' + value).attr('checked', 'true');
+                })
+
+                $(".show-hide_search").on('click', function (event) {
+                    if ($(this).attr('aria-expanded') === 'true') {
+                        this.innerHTML = '<div></div> Ver tudo';
+
+                    } else {
+                        this.innerHTML = '<div class="rotate-icon"></div> Ver menos';
+                    }
+                });
+
+
+                $("div.filter_search [type='checkbox']").on('change', function () {
+                    if (!$(this).is(':checked')) {
+                        var del = $(this).attr('name');
+                        delete data_global['termo-' + del];
+                        console.log(data_global);
+                    }
+                    let filtros = {};
+                    $("#filter_search [name]:checked").get().forEach(function (e, a) {
+                        var filtro = $(e).attr('name');
+                        if (filtros.hasOwnProperty("termo-" + filtro)) {
+                        } else {
+                            filtros["termo-" + filtro] = [];
+                        }
+                        filtros["termo-" + filtro].push($(e).val());
+                    });
+                    data_global['pagina'] = 1;
+                    atualizarChave(filtros);
+                    filtrar(data_global);
+                });
+
+            },
+            error: function (data) {
+                load('off', $('.asidebar'));
+                if (data.statusText !== 'error') {
+                    doSubmit = false;
+                }
+            }
+        })
+    };
+    atualizarFiltros(data_global);
+</script>
+{% endblock %}

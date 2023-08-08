@@ -145,6 +145,6 @@ class ProdutosConfirmarView(View):
 
     def post(self, *args, **kwargs):
         item_id = self.request.POST.get('item_id')
-        nome = self.request.POST.get('nome')
+        nome = self.request.POST.get('nome_cadastro')
         status = BO.item.item.Item().confirmar_compra(item_id=item_id, nome=nome)
         return JsonResponse({'status': status}, safe=False)
