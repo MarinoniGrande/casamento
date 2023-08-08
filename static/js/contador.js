@@ -18,14 +18,33 @@ function timer() {
     if (s < 10) {
         s = "0" + s;
     }
-    document.getElementById("d").innerHTML = d;
-    document.getElementById("h").innerHTML = h;
-    document.getElementById("m").innerHTML = m;
-    document.getElementById("s").innerHTML = s;
-    document.getElementById("d1").innerHTML = d;
-    document.getElementById("h1").innerHTML = h;
-    document.getElementById("m1").innerHTML = m;
-    document.getElementById("s1").innerHTML = s;
+    try {
+        document.getElementById("d").innerHTML = d;
+        document.getElementById("h").innerHTML = h;
+        document.getElementById("m").innerHTML = m;
+        document.getElementById("s").innerHTML = s;
+    }
+    catch (e){
+
+    }
+    try {
+        document.getElementById("d1").innerHTML = d;
+        document.getElementById("h1").innerHTML = h;
+        document.getElementById("m1").innerHTML = m;
+        document.getElementById("s1").innerHTML = s;
+    }
+    catch (e){
+
+    }
+    try {
+        document.getElementById("d2").innerHTML = d;
+        document.getElementById("h2").innerHTML = h;
+        document.getElementById("m2").innerHTML = m;
+        document.getElementById("s2").innerHTML = s;
+    }
+    catch (e){
+
+    }
 }
 
 function fadein() {

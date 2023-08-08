@@ -26,8 +26,9 @@
 
     <main class="main">
         <div class="container w-100 {% if request|is_mobile and request.path != '/' %}mt-n3{% else %}mt-2{% endif %}"
-             id="main-container">
-            <p class="font-3xl mt-2 mb-2 font-weight-bold">Confirmados:</p>
+             id="main-container" >
+            <p class="font-2xl mt-3 mb-2 text-center font-weight-bold">Confirmados:</p>
+        <div style="overflow-x:auto;">
             <table>
                 <tr>
                     <th class="text-center">Contador</th>
@@ -51,6 +52,7 @@
                     </tr>
                 {% endfor %}
             </table>
+        </div>
         </div>
     </main>
 </div>

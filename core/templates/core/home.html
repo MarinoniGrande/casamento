@@ -6,31 +6,31 @@
 
 {% block app_body %}
     <script>
-    function load(status, elem, prop) {
-        let loader;
-        if (elem.length > 0) {
-            if (elem[0].tagName === "MAIN" || elem[0].tagName === "BODY" || elem[0].tagName === "HTML") {
-                loader = `<div class="load load-body" style="position:fixed !important;">
+        function load(status, elem, prop) {
+            let loader;
+            if (elem.length > 0) {
+                if (elem[0].tagName === "MAIN" || elem[0].tagName === "BODY" || elem[0].tagName === "HTML") {
+                    loader = `<div class="load load-body" style="position:fixed !important;">
                             <div class="toriload"></div>
                           </div>`;
-            } else {
-                loader = `<div class="load" style="position:absolute !important;${prop ? prop : ""}">
+                } else {
+                    loader = `<div class="load" style="position:absolute !important;${prop ? prop : ""}">
                             <div class="toriload"></div>
                           </div>`;
-            }
-            switch (status) {
-                case "off":
-                    elem.find('.load').remove();
-                    break;
-                case "on":
-                    elem.prepend(loader);
-                    break;
-                default:
-                    elem.prepend(loader);
+                }
+                switch (status) {
+                    case "off":
+                        elem.find('.load').remove();
+                        break;
+                    case "on":
+                        elem.prepend(loader);
+                        break;
+                    default:
+                        elem.prepend(loader);
+                }
             }
         }
-    }
-</script>
+    </script>
 
     <style>
         .btn-success {
@@ -101,7 +101,7 @@
         /* line 22, /Users/mozartbrum/projects/casare/site/app/assets/stylesheets/themes/floral/partials/cover.sass */
         #inicio #couple-data #name {
             position: absolute;
-            top: {% if request|is_mobile %}100px{% else %}130px{% endif %};
+            top: {% if request|is_mobile %}100px{% else %}100px{% endif %};
             left: 0px;
             right: 0px;
         }
@@ -170,7 +170,19 @@
                         <span style="font-family: great_vibesregular !important; color: #054141;" class="content">Stephanie & Lucas</span>
                     </h2>
                     <h4 class="pathway uppercase">
-                        <span class="content" style="font-family: theseasons_bd,serif; color: #054141;">Novembro 02, 2023 . Haras Fortaleza . Curitiba PR</span>
+                        {% if not request|is_mobile %}
+                        <div id="content" class="text-center mt-2" style="">
+                            <p id="together" class="font-weight-bold" style="color: #054141 !important">
+                                Faltam</p>
+                            <div id="timer2" class="mb-2" style="color: #054141 !important">
+                                <b id="d2"></b> Dias
+                                <b id="h2"></b> Horas
+                                <b id="m2"></b> Minutos
+                                <b id="s2"></b> Segundos
+                            </div>
+                        </div>
+                        {% endif %}
+                        <span class="content" style="color: #054141;">Novembro 02, 2023 . Haras Fortaleza . Curitiba PR</span>
                     </h4>
                 </div>
             </div>
@@ -181,53 +193,67 @@
             <div class="row" data-behavior="fade-on-scroll" data-speed="10">
                 <div class="col-12 mt-3 mb-3">
                     <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4 col-sm-12">
-                        <div style="text-align: center;font-family:serif; color: #9EA899;">
-                            <p class="font-5xl mt-2" style="font-family: great_vibesregular !important; color: #054141;">Nossa História</p>
-                            <p class="font-2xl mt-3" style=" color: #054141;">ESTAMOS NOS CASANDO!</p>
-                            <p class=" font-xl mt-3" style=" color: #054141;">
-                                Conheça os detalhes da nossa caminhada até esse grande sonho do nosso casamento. Quando
-                                nos conhecemos, nem imaginávamos que um dia viveríamos o nosso grande sonho: o
-                                casamento! O dia está chegando, o coração aperta e começa a passar um filme de tudo o
-                                que já vivemos e construímos. E como é bom relembrar cada pedacinho da nossa história de
-                                amor!
-                            </p>
-                            <p class="font-xl mt-4" style=" color: #054141;">
-                                Bom, senta que lá vem história
-                                “A long time ago in a galaxy far far away….”
-                                Uma pandemia atingiu o mundo inteiro, em meio ao caos um Jedi lindo e inteligente salvou
-                                o gatinho de uma princesa.
-                                Em uma noite fria, dentro de um carro deram seu primeiro beijo. Desse dia em diante eles
-                                se tornaram inseparáveis. Eles descobriram que incrivelmente faziam aniversário na mesma
-                                semana, mesmo signo, haviam frequentado a mesma igreja, a mesma faculdade e tinham os
-                                gostos artísticos(filmes,séries e músicas) muito parecidos.
-                                Eles viajaram para lugares mágicos, mas sempre de máscara, já foram a casamentos lindos,
-                                já voaram sobre a as nuvens, conheceram lugares lindos e quentes, lindos e frios…
-                            </p>
-                            <p class="font-xl mt-4" style=" color: #054141;">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-sm-12">
+                            <div style="text-align: center;font-family:serif; color: #9EA899;">
+                                <p class="font-5xl mt-2"
+                                   style="font-family: great_vibesregular !important; color: #054141;">Nossa
+                                    História</p>
+                                <p class="font-2xl mt-3" style=" color: #054141;">ESTAMOS NOS CASANDO!</p>
+                                <p class=" font-xl mt-3" style=" color: #054141;">
+                                    Conheça os detalhes da nossa caminhada até esse grande sonho do nosso casamento.
+                                    Quando
+                                    nos conhecemos, nem imaginávamos que um dia viveríamos o nosso grande sonho: o
+                                    casamento! O dia está chegando, o coração aperta e começa a passar um filme de tudo
+                                    o
+                                    que já vivemos e construímos. E como é bom relembrar cada pedacinho da nossa
+                                    história de
+                                    amor!
+                                </p>
+                                <p class="font-xl mt-4" style=" color: #054141;">
+                                    Bom, senta que lá vem história
+                                    “A long time ago in a galaxy far far away….”
+                                    Uma pandemia atingiu o mundo inteiro, em meio ao caos um Jedi lindo e inteligente
+                                    salvou
+                                    o gatinho de uma princesa.
+                                    Em uma noite fria, dentro de um carro deram seu primeiro beijo. Desse dia em diante
+                                    eles
+                                    se tornaram inseparáveis. Eles descobriram que incrivelmente faziam aniversário na
+                                    mesma
+                                    semana, mesmo signo, haviam frequentado a mesma igreja, a mesma faculdade e tinham
+                                    os
+                                    gostos artísticos(filmes,séries e músicas) muito parecidos.
+                                    Eles viajaram para lugares mágicos, mas sempre de máscara, já foram a casamentos
+                                    lindos,
+                                    já voaram sobre a as nuvens, conheceram lugares lindos e quentes, lindos e frios…
+                                </p>
+                                <p class="font-xl mt-4" style=" color: #054141;">
 
-                                No dia 08/06/2021 comemoraram seus primeiros 365 dias. A pandemia foi se acalmando e no
-                                dia 27/11/2021 rolou o pedido de casamento em uma festa linda, agora no dia 02/11/2023
-                                está marcada a data mais esperada por eles!
-                            </p>
+                                    No dia 08/06/2021 comemoraram seus primeiros 365 dias. A pandemia foi se acalmando e
+                                    no
+                                    dia 27/11/2021 rolou o pedido de casamento em uma festa linda, agora no dia
+                                    02/11/2023
+                                    está marcada a data mais esperada por eles!
+                                </p>
+                            </div>
                         </div>
+                        <div class="col-md-4"></div>
                     </div>
-                        <div class="col-md-4"></div></div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="galeria">
-    <style>
-        .owl-carousel .owl-dots.disabled {
-    display: none !important;
-}
-        .owl-theme .owl-nav {
-    margin-top: 0px;
-}
-    </style>
+        <style>
+            .owl-carousel .owl-dots.disabled {
+                display: none !important;
+            }
+
+            .owl-theme .owl-nav {
+                margin-top: 0px;
+            }
+        </style>
         <div id="intro">
             <div class="carousel-no-container carousel-topo owl-theme owl-carousel w-100">
                 <div class="item cursor-pointer">
@@ -237,7 +263,7 @@
                              alt="Imagem Carousel">
                     </a>
                 </div>
-<div class="item cursor-pointer">
+                <div class="item cursor-pointer">
                     <a href="/" class="carrossel-imagem-mobile">
                         <img class="d-block w-100 height-carousel"
                              src="/static/imagens/itens/teste_mobile.png"
@@ -274,7 +300,8 @@
             <div class="col-6 text-left vertical-line">
                 <p class="font-3xl" style="color: #054141;margin-left: 30px">Onde</p>
                 <p class="font-xl mt-2" style="color: #054141;margin-left: 30px">Haras Fortaleza</p>
-                <p class="font-xl mt-1" style="color: #054141;margin-left: 30px">R. Antonio Singer, 7683 - Campo Largo da</p>
+                <p class="font-xl mt-1" style="color: #054141;margin-left: 30px">R. Antonio Singer, 7683 - Campo Largo
+                    da</p>
                 <p class="font-xl mt-1" style="color: #054141;margin-left: 30px">Roseira, São José dos Pinhais - PR</p>
             </div>
         </div>
@@ -339,7 +366,8 @@
              style="background:  url('/static/imagens/fundo.webp') no-repeat center fixed;    background-size: cover;">
         <div class="row">
             <div class="col-12 text-center" style="margin-top: 40px">
-                <span style="font-family: great_vibesregular !important; color: #054141;" class="font-5xl">Como Chegar</span>
+                <span style="font-family: great_vibesregular !important; color: #054141;"
+                      class="font-5xl">Como Chegar</span>
             </div>
         </div>
         <div class="row">
@@ -348,7 +376,8 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4 col-sm-12">
                         <p class="font-3xl" style="color: #054141;">Transporte</p>
-                        <p class="font-xl mt-2" style="color: #054141;">Trajeto bem asfaltado, com boa iluminação e estacionamento! Uber chega
+                        <p class="font-xl mt-2" style="color: #054141;">Trajeto bem asfaltado, com boa iluminação e
+                            estacionamento! Uber chega
                             com facilidade, tomar cuidado para selecionar o "Haras Fortaleza" no maps ou Uber para ter
                             certeza do destino!</p>
                     </div>
@@ -360,7 +389,8 @@
                     <div class="col-md-3"></div>
                     <div class="col-md-6 col-sm-12">
                         <p class="font-3xl" style="color: #054141;">Acomodação</p>
-                        <p class="font-xl mt-2" style="color: #054141;">Um pouco longe de Curitiba, então aconselhamos alguns hotéis mais perto
+                        <p class="font-xl mt-2" style="color: #054141;">Um pouco longe de Curitiba, então aconselhamos
+                            alguns hotéis mais perto
                             como:
                             Hotel La Dolce Vita Park e Eco Hotel Bouganville</p>
                     </div>
@@ -430,25 +460,28 @@
             <div class="row" data-behavior="fade-on-scroll" data-speed="10">
                 <div class="col-12 mt-3 ">
                     <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4 col-sm-12">
-                        <div style="text-align: center;font-family:serif; color: #9EA899;">
-                            <p class="font-5xl mt-2 mb-3" style="font-family: great_vibesregular !important; color: #054141;">Lista de presentes</p>
-                            <p class=" font-2xl mt-4" style=" color: #054141;">
-                                Queridos familiares e amigos, para nós, a presença de vocês neste dia tão especial é o
-                                maior presente que poderíamos receber. Mas, se vocês também quiserem nos presentear,
-                                ficaremos muito agradecidos.
-                            </p>
-                            <p class="font-2xl" style=" color: #054141;">
-                                Com amor, Phanie e Lucas.
-                            </p>
-                            <a href="/presentes">
-                                <div class="btn btn-success mt-5 btn-lg font-2xl mb-5">Ver lista</div>
-                            </a>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-sm-12">
+                            <div style="text-align: center;font-family:serif; color: #9EA899;">
+                                <p class="font-5xl mt-2 mb-3"
+                                   style="font-family: great_vibesregular !important; color: #054141;">Lista de
+                                    presentes</p>
+                                <p class=" font-2xl mt-4" style=" color: #054141;">
+                                    Queridos familiares e amigos, para nós, a presença de vocês neste dia tão especial é
+                                    o
+                                    maior presente que poderíamos receber. Mas, se vocês também quiserem nos presentear,
+                                    ficaremos muito agradecidos.
+                                </p>
+                                <p class="font-2xl" style=" color: #054141;">
+                                    Com amor, Phanie e Lucas.
+                                </p>
+                                <a href="/presentes">
+                                    <div class="btn btn-success mt-5 btn-lg font-2xl mb-5">Ver lista</div>
+                                </a>
+                            </div>
                         </div>
+                        <div class="col-md-4"></div>
                     </div>
-                    <div class="col-md-4"></div>
-                        </div>
                 </div>
             </div>
         </div>
@@ -531,7 +564,8 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4 col-sm-12">
                         <div style="text-align: center;font-family:serif; color: #9EA899;">
-                            <p class="font-2xl mt-2 mb-3" style="font-family: great_vibesregular !important; color: #054141;">Stephanie &
+                            <p class="font-2xl mt-2 mb-3"
+                               style="font-family: great_vibesregular !important; color: #054141;">Stephanie &
                                 Lucas</p>
                             <p class="font-xl mt-1 mb-3" style=" color: #054141;">Curitiba - PR - 2023</p>
                         </div>
