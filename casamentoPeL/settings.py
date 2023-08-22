@@ -125,7 +125,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-IS_DEV = False
+IS_DEV = True
 if IS_DEV:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
     STATICFILES_STORAGE = 'core.storage.ForgivingManifestStaticFilesStorage'

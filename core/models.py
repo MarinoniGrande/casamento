@@ -12,7 +12,8 @@ class Produto(models.Model):
     vlr_preco_total = models.DecimalField(max_digits=12, decimal_places=2, null=True)
     vlr_preco_cota =models.DecimalField(max_digits=12, decimal_places=2, null=True)
     categoria = models.CharField(max_length=200, null=True)
-
+    qr_code = models.CharField(max_length=200, null=True)
+    chave = models.CharField(max_length=500, null=True)
 
 class ProdutoQRCode(models.Model):
     produto = models.ForeignKey('Produto', on_delete=models.DO_NOTHING, null=True)

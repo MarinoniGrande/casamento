@@ -7,13 +7,13 @@ class Item:
     def __init__(self):
         pass
 
-    def get_all_itens(self, ordenacao='nome'):
+    def get_all_itens(self, ordenacao='vlr_preco_cota'):
         if ordenacao is None:
-            ordenacao = 'nome'
+            ordenacao = 'vlr_preco_cota'
 
         lista = list(core.models.Produto.objects.values('id', 'nome', 'imagem', 'preco_cota', 'qtd_clicks',
                                                         'qtd_cotas_maxima', 'preco_total', 'vlr_preco_total',
-                                                        'vlr_preco_cota',
+                                                        'vlr_preco_cota', 'qr_code', 'chave',
                                                         'categoria').order_by(ordenacao))
         return lista
 

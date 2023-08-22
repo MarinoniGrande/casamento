@@ -246,15 +246,15 @@
                                                     </p>
                                                 </div>
                                                 <div class="text-center">
-                                                    <img width="300" src="/static/imagens/qr/qr1.png">
+                                                    <img width="300" src="{{ p.qr_code }}">
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3"></div>
                                                     <div class="col-md-6 col-sm-12">
                                                         <div class="d-flex mt-2 w-100">
-                                                    <p class="codigo_pix">1234</p>
+                                                    <p class="codigo_pix">{{ p.chave }}</p>
                                                     <button type="button" data-toggle="tooltip" data-placement="top"
-                                                            onclick="copyToClipboard(this, '1234')"
+                                                            onclick="copyToClipboard(this, '{{ p.chave }}')"
                                                             class="btn"><img
                                                             src="/static/img/icons/icon_copy.svg" width="20"
                                                             alt=""></button>

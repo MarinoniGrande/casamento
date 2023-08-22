@@ -24,7 +24,7 @@ class ProdutosView(View):
         ordenacao = self.request.GET.get('ordenacao')
         produtos = BO.item.item.Item().get_all_itens(ordenacao=ordenacao)
         context = {
-            'selecionado': ordenacao if ordenacao is not None else 'nome',
+            'selecionado': ordenacao if ordenacao is not None else 'vlr_preco_cota',
             'produtos': produtos
         }
         return render(self.request, template_name=template_name, context=context)
