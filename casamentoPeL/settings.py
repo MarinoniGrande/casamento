@@ -124,7 +124,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-
+# commit
 IS_DEV = False
 if IS_DEV:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
