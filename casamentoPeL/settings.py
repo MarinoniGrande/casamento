@@ -76,10 +76,24 @@ WSGI_APPLICATION = 'casamentoPeL.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'defaultdb',
+        'USER': 'doadmin',
+        'PASSWORD': 'AVNS_Xx0D-Y_q5o0lN8TP6lF',
+        'HOST': 'db-postgresql-nyc1-02232-do-user-13534301-0.b.db.ondigitalocean.com',
+        'PORT': '25060',
+        'OPTIONS': {
+            'application_name': 'Voái - Core'
+        }
     }
 }
 
